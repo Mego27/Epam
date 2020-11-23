@@ -1,6 +1,6 @@
 function convertStyle({
   top,
-  bottom: positionBottom,
+  bottom,
   margin: {
     top: marginTop = 0,
     bottom: marginBottom = 0,
@@ -8,7 +8,7 @@ function convertStyle({
 }) {
   return {
     positionTop: top * 2,
-    positionBottom: positionBottom * 2,
+    positionBottom: bottom * 2,
     marginTop,
     marginBottom,
   };
