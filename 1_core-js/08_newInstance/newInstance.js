@@ -1,8 +1,8 @@
 function newInstance(constructor, ...args) {
-  const result = {};
-  const thisValue = Object.create(constructor.prototype);
-  constructor.apply(result, ...args);
-  Object.setPrototypeOf(result, thisValue);
+  let result = {};
+
+  result = constructor.apply(result, ...args);
+  result.__proto__ = constructor.prototype;
 
   return result;
 }
