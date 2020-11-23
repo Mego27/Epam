@@ -1,9 +1,10 @@
 function convertObjectKeysToSymbol(object) {
-  const resultObject = {};
-  Object.entries(object).forEach(([key, value]) => {
+  const resultObject = Object.entries(object).reduce((result, [key, value]) => {
     const symbolKey = Symbol(key);
-    resultObject[symbolKey] = value;
-  });
+    result[symbolKey] = value;
+
+    return result;
+  }, {});
 
   return resultObject;
 }
