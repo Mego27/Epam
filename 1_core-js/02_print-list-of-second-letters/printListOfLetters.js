@@ -1,9 +1,8 @@
 function printListOfLetters(word) {
-  const arrayOfLetters = [...word]
-  let counter = 1;
+  const arrayOfLetters = [...word];
   arrayOfLetters.forEach((letter, index) => {
     if (index % 2 !== 0) {
-      console.log(`${counter++}. ${letter}`);
+      console.log(`${(index + 1) / 2}. ${letter}`);
     }
   });
 }
