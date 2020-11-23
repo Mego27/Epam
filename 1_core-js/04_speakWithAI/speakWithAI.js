@@ -1,8 +1,8 @@
 function speakWithAI() {
   do {
     const question = prompt('Что бы вы хотели узнать?');
-    if (question.endsWith('?')) {
 
+    if (question.endsWith('?')) {
       if (question.startsWith('Как мне')) {
         alert('Подумать и сделать');
         continue;
@@ -20,6 +20,6 @@ function speakWithAI() {
   } while (confirm('Продолжить?'));
 
   alert('ИИ устал и ушёл спать(закончил работу)');
-  
+
   return;
 }
