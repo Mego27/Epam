@@ -3,16 +3,12 @@ function deepCloneObject(object) {
 
   if (Array.isArray(object)) {
     result = object.map(deepCloneObject);
-  }
-
-  if (typeof object === 'object') {
+  } else if (typeof object === 'object') {
     Object.entries(object).forEach(([key, value]) => {
-      if (Array.isArray(value) || typeof value === 'object') {
-        result[key] = deepCloneObject(value);
-      } else {
-        result[key] = value;
-      }
+      result[key] = deepCloneObject(value);
     });
+  } else {
+    result = object;
   }
 
   return result;
