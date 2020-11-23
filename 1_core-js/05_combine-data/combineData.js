@@ -1,43 +1,24 @@
-function combineData(type, ...args) {
+import convertDataToArray from './convertDataToArray';
+import convertDataToObject from './convertDataToObject';
+
+function combineData(type, ...data) {
   let result;
-  let data = {};
-  let dataArray = [];
-  let counterDefaultKeys = 1;
-  args.forEach((item) => {
-    if (item instanceof Array) {
-      item.forEach((value, index) => {
-        data[index] = value;
-        dataArray.push(value);
-      })
-
-      return;
-    }
-
-    if (item instanceof Object) {
-      Object.entries(item).forEach(([key, value]) => {
-        data[key] = value;
-        dataArray.push(value);
-      })
-
-      return;
-    }
-    
-    data[`key${counterDefaultKeys++}`] = item;
-    dataArray.push(item);
-  })
+  const dataObject = convertDataToObject(data);
+  const dataArray = convertDataToArray(data);
 
   switch (type) {
     case 'object': {
-      result = data;
+      result = dataObject;
       break;
     }
 
     case 'array': {
-      return dataArray;
+      result = dataArray;
+      break;
     }
 
     case 'number': {
-      result = dataArray.reduce((result, value) => result + +value, 0);
+      result = dataArray.reduce((result, value) => result + Number(value));
       break;
     }
 
@@ -50,6 +31,9 @@ function combineData(type, ...args) {
       result = dataArray.reduce((result, value) => result && value, true);
       break;
     }
+
+    default:
+      break;
   }
 
   return result;
