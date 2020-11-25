@@ -20,6 +20,4 @@ function speakWithAI() {
   } while (confirm('Продолжить?'));
 
   alert('ИИ устал и ушёл спать(закончил работу)');
-
-  return;
 }
