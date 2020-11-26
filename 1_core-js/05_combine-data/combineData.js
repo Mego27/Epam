@@ -1,27 +1,6 @@
 function combineData(type, ...data) {
   let result;
-  let counterDefaultKeys = 0;
-  const preparedData = new Map();
-
-  data.forEach((item) => {
-    if (Array.isArray(item)) {
-      item.forEach((value, index) => {
-        preparedData.set(index, value);
-      });
-
-      return;
-    }
-
-    if (item instanceof Object) {
-      Object.entries(item).forEach(([key, value]) => {
-        preparedData.set(key, value);
-      });
-
-      return;
-    }
-
-    preparedData.set(`key${counterDefaultKeys += 1}`, item);
-  });
+  const preparedData = convertToMap(data);
 
   switch (type) {
     case 'object': {
@@ -61,6 +40,34 @@ function combineData(type, ...data) {
     default:
       break;
   }
+
+  return result;
+}
+
+function convertToMap(...data) {
+  const result = new Map();
+  let counterDefaultKeys = 0;
+
+  data.forEach((item) => {
+    if (Array.isArray(item)) {
+      item.forEach((value, index) => {
+        result.set(index, value);
+      });
+
+      return;
+    }
+
+    if (item instanceof Object) {
+      Object.entries(item).forEach(([key, value]) => {
+        result.set(key, value);
+      });
+
+      return;
+    }
+
+    counterDefaultKeys += 1;
+    result.set(`key${counterDefaultKeys}`, item);
+  });
 
   return result;
 }
