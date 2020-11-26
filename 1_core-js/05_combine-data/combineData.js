@@ -82,7 +82,3 @@ function convertToMap(data) {
 
   return result;
 }
-
-console.log(combineData('string', 10, 'test', true, [20, 30], { a: 1, b: 2 }));
-console.log(combineData('number', 10, 'test', true, [20, 30], { a: 1, b: 2 }));
-console.log(combineData('boolean', 10, 'test', true, [20, 30], { a: 1, b: 2 }));
