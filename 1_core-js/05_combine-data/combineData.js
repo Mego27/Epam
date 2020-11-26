@@ -4,36 +4,47 @@ function combineData(type, ...data) {
 
   switch (type) {
     case 'object': {
-      result = {};
-      preparedData.forEach((value, key) => {
-        result[key] = value;
-      });
+      const arrayOfEntries = [...preparedData.entries()];
+
+      result = arrayOfEntries.reduce((resultObject, [key, value]) => {
+        resultObject[key] = value;
+
+        return resultObject;
+      }, {});
       break;
     }
 
     case 'array': {
-      result = [];
-      preparedData.forEach((value) => {
-        result.push(value);
-      });
+      const arrayOfValues = [...preparedData.values()];
+
+      result = arrayOfValues.reduce((resultArray, value) => {
+        resultArray.push(value);
+
+        return resultArray;
+      }, []);
       break;
     }
 
     case 'number': {
-      result = 0;
-      preparedData.forEach((value) => result += Number(value));
+      const arrayOfValues = [...preparedData.values()];
+      result = arrayOfValues.reduce((sum, value) => sum += Number(value), 0);
       break;
     }
 
     case 'string': {
-      result = '';
-      preparedData.forEach((value) => result += value);
+      const arrayOfValues = [...preparedData.values()];
+      result = arrayOfValues.reduce((sumString, value) => sumString += value, '');
       break;
     }
 
     case 'boolean': {
-      result = true;
-      preparedData.forEach((value) => result = result && value);
+      const arrayOfValues = [...preparedData.values()];
+
+      result = arrayOfValues.reduce((sumConjunction, value) => {
+        sumConjunction = sumConjunction && value;
+
+        return sumConjunction;
+      }, true);
       break;
     }
 
@@ -44,7 +55,7 @@ function combineData(type, ...data) {
   return result;
 }
 
-function convertToMap(...data) {
+function convertToMap(data) {
   const result = new Map();
   let counterDefaultKeys = 0;
 
@@ -71,3 +82,7 @@ function convertToMap(...data) {
 
   return result;
 }
+
+console.log(combineData('string', 10, 'test', true, [20, 30], { a: 1, b: 2 }));
+console.log(combineData('number', 10, 'test', true, [20, 30], { a: 1, b: 2 }));
+console.log(combineData('boolean', 10, 'test', true, [20, 30], { a: 1, b: 2 }));
