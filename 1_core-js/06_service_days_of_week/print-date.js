@@ -3,7 +3,8 @@ function printDate(year, month, day, format) {
     date: `${year}-${month}-${day}`,
     format,
   };
-  const resultDate = JSON.parse(getDay(JSON.stringify(date)));
+  const dateWithWeekday = getDay(JSON.stringify(date));
+  const resultDate = JSON.parse(dateWithWeekday);
   console.log(resultDate);
 }
 
