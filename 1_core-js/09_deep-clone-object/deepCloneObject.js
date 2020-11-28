@@ -2,8 +2,10 @@ function deepCloneObject(object) {
   let result = {};
 
   if (Array.isArray(object)) {
-    result = object.map(deepCloneObject);
-  } else if (typeof object === 'object') {
+    result = [];
+  }
+
+  if (typeof object === 'object') {
     Object.entries(object).forEach(([key, value]) => {
       result[key] = deepCloneObject(value);
     });
