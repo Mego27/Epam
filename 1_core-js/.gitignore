@@ -1,7 +1,0 @@
-.gitignore
-package.json
-package-lock.json
-node_modules/
-/.vscode
-.eslintrc
-.eslintignore
