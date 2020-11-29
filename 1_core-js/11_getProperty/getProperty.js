@@ -1,22 +1,21 @@
 function getProperty(object, propertyPath) {
-  const key = propertyPath.split('.')[0];
-  if (object.hasOwnProperty(key)) {
-    let remainingProperties = '';
+  let result;
+  const firstPointIndex = propertyPath.indexOf('.');
+  let key = propertyPath.slice(0, firstPointIndex);
+  let remainingProperties = propertyPath.slice(firstPointIndex + 1);
 
-    if (propertyPath.indexOf('.') > 0) {
-      remainingProperties = propertyPath.slice(propertyPath.indexOf('.') + 1);
-    }
-
-    if (remainingProperties.length > 0) {
-      if (typeof object[key] === 'object') {
-        return getProperty(object[key], remainingProperties);
-      }
-
-      return undefined;
-    }
-
-    return object[key];
+  if (firstPointIndex === -1) {
+    key = propertyPath;
+    remainingProperties = '';
   }
 
-  return undefined;
+  if (object.hasOwnProperty(key)) {
+    result = object[key];
+
+    if (remainingProperties.length > 0) {
+      result = getProperty(result, remainingProperties);
+    }
+  }
+
+  return result;
 }
