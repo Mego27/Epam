@@ -1,50 +1,30 @@
 function combineData(type, ...data) {
   let result;
-  const preparedData = convertToMap(data);
+  const preparedData = prepareData(type, data);
 
   switch (type) {
     case 'object': {
-      const arrayOfEntries = [...preparedData.entries()];
-
-      result = arrayOfEntries.reduce((resultObject, [key, value]) => {
-        resultObject[key] = value;
-
-        return resultObject;
-      }, {});
+      result = getCombinedDataToObject(preparedData);
       break;
     }
 
     case 'array': {
-      const arrayOfValues = [...preparedData.values()];
-
-      result = arrayOfValues.reduce((resultArray, value) => {
-        resultArray.push(value);
-
-        return resultArray;
-      }, []);
+      result = getCombinedDataToArray(preparedData);
       break;
     }
 
     case 'number': {
-      const arrayOfValues = [...preparedData.values()];
-      result = arrayOfValues.reduce((sum, value) => sum += Number(value), 0);
+      result = getCombinedDataToNumber(preparedData);
       break;
     }
 
     case 'string': {
-      const arrayOfValues = [...preparedData.values()];
-      result = arrayOfValues.reduce((sumString, value) => sumString += value, '');
+      result = getCombinedDataToString(preparedData);
       break;
     }
 
     case 'boolean': {
-      const arrayOfValues = [...preparedData.values()];
-
-      result = arrayOfValues.reduce((sumConjunction, value) => {
-        sumConjunction = sumConjunction && value;
-
-        return sumConjunction;
-      }, true);
+      result = getCombinedDataToBoolean(preparedData);
       break;
     }
 
@@ -53,6 +33,14 @@ function combineData(type, ...data) {
   }
 
   return result;
+}
+
+function prepareData(type, data) {
+  if (type === 'object' && type !== 'array') {
+    return [...convertToMap(data).entries()];
+  }
+
+  return [...convertToMap(data).values()];
 }
 
 function convertToMap(data) {
@@ -81,4 +69,32 @@ function convertToMap(data) {
   });
 
   return result;
+}
+
+function getCombinedDataToObject(data) {
+  return data.reduce((resultObject, [key, value]) => {
+    resultObject[key] = value;
+
+    return resultObject;
+  }, {});
+}
+
+function getCombinedDataToArray(data) {
+  return data.reduce((resultArray, value) => {
+    resultArray.push(value);
+
+    return resultArray;
+  }, []);
+}
+
+function getCombinedDataToNumber(data) {
+  return data.reduce((sum, value) => sum + Number(value));
+}
+
+function getCombinedDataToString(data) {
+  return data.reduce((sumString, value) => sumString + value);
+}
+
+function getCombinedDataToBoolean(data) {
+  return data.reduce((sumConjunction, value) => sumConjunction && value);
 }
