@@ -1,36 +1,12 @@
 function combineData(type, ...data) {
-  let result;
   const preparedData = prepareData(type, data);
-
-  switch (type) {
-    case 'object': {
-      result = getCombinedDataToObject(preparedData);
-      break;
-    }
-
-    case 'array': {
-      result = getCombinedDataToArray(preparedData);
-      break;
-    }
-
-    case 'number': {
-      result = getCombinedDataToNumber(preparedData);
-      break;
-    }
-
-    case 'string': {
-      result = getCombinedDataToString(preparedData);
-      break;
-    }
-
-    case 'boolean': {
-      result = getCombinedDataToBoolean(preparedData);
-      break;
-    }
-
-    default:
-      break;
-  }
+  const result = {
+    object: getCombinedDataToObject,
+    array: getCombinedDataToArray,
+    string: getCombinedDataToString,
+    number: getCombinedDataToNumber,
+    boolean: getCombinedDataToBoolean,
+  }[type](preparedData);
 
   return result;
 }
