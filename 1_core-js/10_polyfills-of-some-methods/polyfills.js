@@ -1,16 +1,22 @@
 if (!Function.prototype.bind) {
-  Function.prototype.bind = function bind(context, ...args) {
-    const func = this;
+  Function.prototype.bind = function bind(context) {
+    var func = this;
+    var args = Array.from(arguments).slice(1);
 
-    return function boundFunction(...extraAgs) {
-      return func.apply(context, [...args, ...extraAgs]);
+    return function boundFunction() {
+      var extraArgs = Array.from(arguments).slice(1);
+      var allArgs = args.concat(extraArgs);
+
+      return func.apply(context, allArgs);
     };
   };
 }
 
 if (!Array.prototype.every) {
+  var globalThis = this;
   Array.prototype.every = function every(callback, thisArg) {
-    var arr = this;
+    thisArg === undefined ? globalThis : thisArg;
+    var arr = thisArg;
 
     for (var i = 0; i < arr.length; i += 1) {
       if (!callback.call(thisArg, arr[i], i, arr)) {
@@ -23,8 +29,10 @@ if (!Array.prototype.every) {
 }
 
 if (!Array.prototype.filter) {
+  var globalThis = this;
   Array.prototype.filter = function filter(callback, thisArg) {
-    var arr = this;
+    thisArg === undefined ? globalThis : thisArg;
+    var arr = thisArg;
     var result = [];
 
     for (var i = 0; i < arr.length; i += 1) {
@@ -38,8 +46,10 @@ if (!Array.prototype.filter) {
 }
 
 if (!Array.prototype.find) {
+  var globalThis = this;
   Array.prototype.find = function find(callback, thisArg) {
-    var arr = this;
+    thisArg === undefined ? globalThis : thisArg;
+    var arr = thisArg;
 
     for (var i = 0; i < arr.length; i += 1) {
       if (callback.call(thisArg, arr[i], i, arr)) {
@@ -50,8 +60,10 @@ if (!Array.prototype.find) {
 }
 
 if (!Array.prototype.forEach) {
-  Array.prototype.forEach = function forEach(callback, thisArg = this) {
-    var arr = this;
+  var globalThis = this;
+  Array.prototype.forEach = function forEach(callback, thisArg) {
+    thisArg === undefined ? globalThis : thisArg;
+    var arr = thisArg;
 
     for (var i = 0; i < arr.length; i += 1) {
       callback.call(thisArg, arr[i], i, arr);
@@ -60,8 +72,10 @@ if (!Array.prototype.forEach) {
 }
 
 if (!Array.prototype.map) {
+  var globalThis = this;
   Array.prototype.map = function map(callback, thisArg = this) {
-    var arr = this;
+    thisArg === undefined ? globalThis : thisArg;
+    var arr = thisArg;
     var result = [];
 
     for (var i = 0; i < arr.length; i += 1) {
@@ -73,8 +87,10 @@ if (!Array.prototype.map) {
 }
 
 if (!Array.prototype.reduce) {
+  var globalThis = this;
   Array.prototype.reduce = function reduce(callback, initialValue) {
-    var arr = this;
+    thisArg === undefined ? globalThis : thisArg;
+    var arr = thisArg;
     var result = initialValue;
     var i = 0;
 
@@ -92,8 +108,10 @@ if (!Array.prototype.reduce) {
 }
 
 if (!Array.prototype.some) {
+  var globalThis = this;
   Array.prototype.some = function some(callback, thisArg) {
-    var arr = this;
+    thisArg === undefined ? globalThis : thisArg;
+    var arr = thisArg;
 
     for (var i = 0; i < arr.length; i += 1) {
       if (callback.call(thisArg, arr[i], i, arr)) {
