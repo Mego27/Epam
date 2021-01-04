@@ -1,8 +1,13 @@
 function newInstance(constructor, ...args) {
   let result = {};
 
-  result = constructor.apply(result, ...args);
-  result.__proto__ = constructor.prototype;
+  if (typeof (constructor.apply(result, args)) === 'object') {
+    result = constructor.apply(result, args);
+  } else {
+    Object.setPrototypeOf(result, constructor.prototype);
+  }
 
   return result;
 }
+
+module.exports = newInstance;

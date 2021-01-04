@@ -1,0 +1,14 @@
+{
+  "name": "08_newinstance",
+  "version": "1.0.0",
+  "description": "",
+  "main": "newInstance.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^8.2.1"
+  }
+}
