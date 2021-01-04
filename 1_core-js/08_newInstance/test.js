@@ -28,7 +28,7 @@ describe('testing newInstance', () => {
     }
 
     const expectedResult = new Test(10, 20);
-    const actualResult = newInstance(Test, 10, 20);
+    const actualResult = newInstance(Test, [10, 20]);
 
     assert.deepStrictEqual(actualResult, expectedResult);
   });

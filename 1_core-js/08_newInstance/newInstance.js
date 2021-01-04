@@ -1,4 +1,4 @@
-function newInstance(constructor, ...args) {
+function newInstance(constructor, args) {
   let result = {};
 
   if (typeof (constructor.apply(result, args)) === 'object') {
