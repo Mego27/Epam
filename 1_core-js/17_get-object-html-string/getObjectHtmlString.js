@@ -1,8 +1,9 @@
 function prepareHtmlString(string) {
-  const regDeleteSpacesBeforeTag = new RegExp('<\\s+', 'g');
-  const regDeleteSpacesAfterTag = new RegExp('\\s+>', 'g');
-  const regDeleteSpacesInTag = new RegExp('\\s+', 'g');
-  const regDeleteSpacesBeforeAttribute = new RegExp('\\s*=\\s*"', 'g');
+  // const regDeleteSpacesBeforeTag = new RegExp('<\\s+', 'g');
+  const regDeleteSpacesBeforeTag = /<\s+/g;
+  const regDeleteSpacesAfterTag = /\s+>/g;
+  const regDeleteSpacesInTag = /\s+/g;
+  const regDeleteSpacesBeforeAttribute = /\s*=\s*"/g;
   const preparedString = string.replace(regDeleteSpacesInTag, ' ')
     .replace(regDeleteSpacesBeforeAttribute, '="')
     .replace(regDeleteSpacesBeforeTag, '<')
@@ -14,7 +15,7 @@ function prepareHtmlString(string) {
 function getArrayOfTagsAndAttributes(htmlString) {
   const arrayOfTagsMatches = [...htmlString.matchAll(/<(\w+)\s*([\w\s"=:;]+)*>/g)];
   const arrayOfTagsAndAttributes = arrayOfTagsMatches
-    .map(([fullMatch, nameTag, attributesString, ...other]) => [nameTag, attributesString || '']);
+    .map(([fullMatch, nameTag, attributesString]) => [nameTag, attributesString || '']);
 
   return arrayOfTagsAndAttributes;
 }
@@ -22,7 +23,7 @@ function getArrayOfTagsAndAttributes(htmlString) {
 function getArrayOfAttributes(attributesString) {
   const attributes = [...attributesString.matchAll(/(\w*)=?"\s*([\w\s:;]*)"/g)];
   const arrayOfAttributes = attributes
-    .map(([fullMatch, nameAttribute, value, ...other]) => [nameAttribute, value.trim()]);
+    .map(([fullMatch, nameAttribute, value]) => [nameAttribute, value.trim()]);
 
   return arrayOfAttributes;
 }
