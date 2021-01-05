@@ -7,7 +7,7 @@ function debounce(func, delay) {
 
       func(...args);
 
-      setTimeout(() => isCoolDown = false, delay);
+      setTimeout(() => (isCoolDown = false), delay);
     }
   };
 }
