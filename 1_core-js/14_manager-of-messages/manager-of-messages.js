@@ -1,19 +1,25 @@
 function ManagerOfMessages() {
   this.properties = {
-    isPrintDate: false,
+    shouldPrintDate: false,
     color: {
       information: 'white',
       warning: 'yellow',
       error: 'red',
+    },
+    keywordOfType: {
+      information: 'информация',
+      warning: 'предупреждение',
+      error: 'ошибка',
     },
     isEnabledDelay: true,
     delay: 1000,
     _isCoolDown: false,
   };
 
-  this.printMessage = (text, type = this._defineType(text)) => {
+  this.printMessage = (text, userType) => {
+    const type = userType || this._defineType(text);
     const color = this._selectColorByType(type);
-    const { isPrintDate } = this.properties;
+    const { shouldPrintDate: isPrintDate } = this.properties;
 
     if (this.properties.isEnabledDelay) {
       this._printWithDelay(text, type, color, isPrintDate);
@@ -28,7 +34,7 @@ function ManagerOfMessages() {
 
       this._print(text, type, color, isPrintDate);
 
-      setTimeout(() => this.properties.isCoolDown = false, this.properties.delay);
+      setTimeout(() => (this.properties.isCoolDown = false), this.properties.delay);
     }
   };
 
@@ -38,15 +44,15 @@ function ManagerOfMessages() {
   };
 
   this._defineType = (text) => {
-    if (text.toLowerCase().includes('ошибка')) {
-      return 'error';
-    }
+    let resultType = 'information';
+    Object.entries(this.properties.keywordOfType).forEach(([type, word]) => {
+      if (text.toLowerCase().includes(word)) {
+        // console.log(text, word, type);
+        resultType = type;
+      }
+    });
 
-    if (text.toLowerCase().includes('предупреждение')) {
-      return 'warning';
-    }
-
-    return 'information';
+    return resultType;
   };
 
   this._selectColorByType = (type) => {
