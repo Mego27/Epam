@@ -3,7 +3,7 @@ function newInstance(constructor, args) {
 
   if (typeof (constructor.apply(result, args)) === 'object') {
     result = constructor.apply(result, args);
-  } else {
+  } else if (typeof (constructor.prototype) === 'object') {
     Object.setPrototypeOf(result, constructor.prototype);
   }
 
