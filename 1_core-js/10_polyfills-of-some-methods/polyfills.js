@@ -1,10 +1,12 @@
+var globalThis = this;
+
 if (!Function.prototype.bind) {
   Function.prototype.bind = function bind(context) {
     var func = this;
-    var args = Array.from(arguments).slice(1);
+    var args = Array.prototype.slice.call(arguments).slice(1);
 
     return function boundFunction() {
-      var extraArgs = Array.from(arguments).slice(1);
+      var extraArgs = Array.prototype.slice.call(arguments);
       var allArgs = args.concat(extraArgs);
 
       return func.apply(context, allArgs);
@@ -12,43 +14,52 @@ if (!Function.prototype.bind) {
   };
 }
 
-if (!Array.prototype.every) {
-  var globalThis = this;
-  Array.prototype.every = function every(callback, thisArg) {
-    thisArg === undefined ? globalThis : thisArg;
+if (!Array.prototype.forEach) {
+  Array.prototype.forEach = function forEach(callback, usersThisArg) {
+    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
     var arr = thisArg;
 
     for (var i = 0; i < arr.length; i += 1) {
-      if (!callback.call(thisArg, arr[i], i, arr)) {
-        return false;
-      }
+      callback.call(thisArg, arr[i], i, arr);
     }
+  };
+}
 
-    return true;
+if (!Array.prototype.every) {
+  Array.prototype.every = function every(callback, usersThisArg) {
+    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
+    var arr = thisArg;
+    var result = true;
+
+    arr.forEach(function isCallbacked() {
+      if (!callback.call(thisArg, arr[i], i, arr)) {
+        result = false;
+      }
+    });
+
+    return result;
   };
 }
 
 if (!Array.prototype.filter) {
-  var globalThis = this;
-  Array.prototype.filter = function filter(callback, thisArg) {
-    thisArg === undefined ? globalThis : thisArg;
+  Array.prototype.filter = function filter(callback, usersThisArg) {
+    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
     var arr = thisArg;
     var result = [];
 
-    for (var i = 0; i < arr.length; i += 1) {
+    arr.forEach(function fillArray() {
       if (callback.call(thisArg, arr[i], i, arr)) {
         result.push(arr[i]);
       }
-    }
+    });
 
     return result;
   };
 }
 
 if (!Array.prototype.find) {
-  var globalThis = this;
-  Array.prototype.find = function find(callback, thisArg) {
-    thisArg === undefined ? globalThis : thisArg;
+  Array.prototype.find = function find(callback, usersThisArg) {
+    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
     var arr = thisArg;
 
     for (var i = 0; i < arr.length; i += 1) {
@@ -59,38 +70,23 @@ if (!Array.prototype.find) {
   };
 }
 
-if (!Array.prototype.forEach) {
-  var globalThis = this;
-  Array.prototype.forEach = function forEach(callback, thisArg) {
-    thisArg === undefined ? globalThis : thisArg;
-    var arr = thisArg;
-
-    for (var i = 0; i < arr.length; i += 1) {
-      callback.call(thisArg, arr[i], i, arr);
-    }
-  };
-}
-
 if (!Array.prototype.map) {
-  var globalThis = this;
-  Array.prototype.map = function map(callback, thisArg = this) {
-    thisArg === undefined ? globalThis : thisArg;
+  Array.prototype.map = function map(callback, usersThisArg) {
+    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
     var arr = thisArg;
     var result = [];
 
-    for (var i = 0; i < arr.length; i += 1) {
+    arr.forEach(function fillCallbackedArray() {
       result.push(callback.call(thisArg, arr[i], i, arr));
-    }
+    });
 
     return result;
   };
 }
 
 if (!Array.prototype.reduce) {
-  var globalThis = this;
   Array.prototype.reduce = function reduce(callback, initialValue) {
-    thisArg === undefined ? globalThis : thisArg;
-    var arr = thisArg;
+    var arr = this;
     var result = initialValue;
     var i = 0;
 
@@ -99,26 +95,26 @@ if (!Array.prototype.reduce) {
       result = arr[0];
     }
 
-    for (i; i < arr.length; i += 1) {
+    arr.forEach(function useCallback() {
       result = callback(result, arr[i], i, arr);
-    }
+    });
 
     return result;
   };
 }
 
 if (!Array.prototype.some) {
-  var globalThis = this;
-  Array.prototype.some = function some(callback, thisArg) {
-    thisArg === undefined ? globalThis : thisArg;
+  Array.prototype.some = function some(callback, usersThisArg) {
+    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
     var arr = thisArg;
+    var result = false;
 
-    for (var i = 0; i < arr.length; i += 1) {
+    arr.forEach(function isCallbacked() {
       if (callback.call(thisArg, arr[i], i, arr)) {
-        return true;
+        result = true;
       }
-    }
+    });
 
-    return false;
+    return result;
   };
 }
