@@ -34,5 +34,5 @@ function getDate(day, month, year, format = 'year_month_day') {
 
   return date;
 }
-console.log(getDate(100, 1, 2021))
+
 module.exports = getDate;
