@@ -5,9 +5,10 @@ function debounce(func, delay) {
     if (!isCoolDown) {
       isCoolDown = true;
 
-      func(...args);
-
-      setTimeout(() => (isCoolDown = false), delay);
+      setTimeout(() => {
+        isCoolDown = false;
+        func.apply(this, args);
+      }, delay);
     }
   };
 }
@@ -15,10 +16,12 @@ function debounce(func, delay) {
 function throttle(func, delay) {
   let isCoolDown = false;
   let lastArgs;
+  let savedThis;
 
   return function throttledFunc(...args) {
     if (isCoolDown) {
       lastArgs = args;
+      savedThis = this;
 
       return;
     }
@@ -31,9 +34,10 @@ function throttle(func, delay) {
       isCoolDown = false;
 
       if (lastArgs) {
-        throttledFunc(...lastArgs);
+        throttledFunc.apply(savedThis, lastArgs);
 
         lastArgs = null;
+        savedThis = null;
       }
     }, delay);
   };
