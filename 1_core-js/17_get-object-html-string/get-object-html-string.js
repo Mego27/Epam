@@ -1,5 +1,4 @@
 function prepareHtmlString(string) {
-  // const regDeleteSpacesBeforeTag = new RegExp('<\\s+', 'g');
   const regDeleteSpacesBeforeTag = /<\s+/g;
   const regDeleteSpacesAfterTag = /\s+>/g;
   const regDeleteSpacesInTag = /\s+/g;
