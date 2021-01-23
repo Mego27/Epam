@@ -1,4 +1,3 @@
-const assert = require('assert');
 const newInstance = require('./new-instance');
 
 describe('testing newInstance', () => {
@@ -8,7 +7,7 @@ describe('testing newInstance', () => {
     const expectedResult = new Test();
     const actualResult = newInstance(Test);
 
-    assert.deepStrictEqual(actualResult, expectedResult);
+    expect(actualResult).toStrictEqual(expectedResult);
   });
 
   it('should return {} with constructor Object', () => {
@@ -19,7 +18,7 @@ describe('testing newInstance', () => {
     const expectedResult = new Test();
     const actualResult = newInstance(Test);
 
-    assert.deepStrictEqual(actualResult, expectedResult);
+    expect(actualResult).toStrictEqual(expectedResult);
   });
 
   it('should return { a: 10, b: 20 } with constructor Object', () => {
@@ -30,7 +29,7 @@ describe('testing newInstance', () => {
     const expectedResult = new Test(10, 20);
     const actualResult = newInstance(Test, [10, 20]);
 
-    assert.deepStrictEqual(actualResult, expectedResult);
+    expect(actualResult).toStrictEqual(expectedResult);
   });
 
   it('should return { b: complete } with constructor Test', () => {
@@ -41,7 +40,7 @@ describe('testing newInstance', () => {
     const expectedResult = new Test();
     const actualResult = newInstance(Test);
 
-    assert.deepStrictEqual(actualResult, expectedResult);
+    expect(actualResult).toStrictEqual(expectedResult);
   });
 
   it('should return {} with __proto__ Object', () => {
@@ -51,7 +50,7 @@ describe('testing newInstance', () => {
     const expectedResult = new Test();
     const actualResult = newInstance(Test);
 
-    assert.deepStrictEqual(actualResult.__proto__, expectedResult.__proto__);
+    expect(actualResult.__proto__).toStrictEqual(expectedResult.__proto__);
   });
 
   it('should return {} with __proto__ { a: 10 }', () => {
@@ -61,6 +60,6 @@ describe('testing newInstance', () => {
     const expectedResult = new Test();
     const actualResult = newInstance(Test);
 
-    assert.deepStrictEqual(actualResult.__proto__, expectedResult.__proto__);
+    expect(actualResult.__proto__).toStrictEqual(expectedResult.__proto__);
   });
 });
