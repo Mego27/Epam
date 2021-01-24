@@ -1,7 +1,7 @@
 function getDate(day, month, year, format = 'year_month_day') {
   let date = null;
-  const isCorrectDay = (typeof (day) === 'number') && (day >= 1 <= 31);
-  const isCorrectMonth = (typeof (month) === 'number') && (month >= 1 <= 12);
+  const isCorrectDay = (typeof (day) === 'number') && (day >= 1 && day <= 31);
+  const isCorrectMonth = (typeof (month) === 'number') && (month >= 1 && month <= 12);
   const isCorrectYear = (typeof (year) === 'number') && (year >= 1000);
 
   if (isCorrectDay && isCorrectMonth && isCorrectYear) {
@@ -34,3 +34,5 @@ function getDate(day, month, year, format = 'year_month_day') {
 
   return date;
 }
+
+module.exports = getDate;
