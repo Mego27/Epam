@@ -1,4 +1,4 @@
-var globalThis = this;
+var thisValue = this;
 
 if (!Function.prototype.bind) {
   Function.prototype.bind = function bind(context) {
@@ -16,7 +16,7 @@ if (!Function.prototype.bind) {
 
 if (!Array.prototype.forEach) {
   Array.prototype.forEach = function forEach(callback, usersThisArg) {
-    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
+    var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = thisArg;
 
     for (var i = 0; i < arr.length; i += 1) {
@@ -27,7 +27,7 @@ if (!Array.prototype.forEach) {
 
 if (!Array.prototype.every) {
   Array.prototype.every = function every(callback, usersThisArg) {
-    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
+    var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = thisArg;
     var result = true;
 
@@ -43,7 +43,7 @@ if (!Array.prototype.every) {
 
 if (!Array.prototype.filter) {
   Array.prototype.filter = function filter(callback, usersThisArg) {
-    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
+    var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = thisArg;
     var result = [];
 
@@ -59,7 +59,7 @@ if (!Array.prototype.filter) {
 
 if (!Array.prototype.find) {
   Array.prototype.find = function find(callback, usersThisArg) {
-    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
+    var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = thisArg;
 
     for (var i = 0; i < arr.length; i += 1) {
@@ -72,7 +72,7 @@ if (!Array.prototype.find) {
 
 if (!Array.prototype.map) {
   Array.prototype.map = function map(callback, usersThisArg) {
-    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
+    var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = thisArg;
     var result = [];
 
@@ -105,7 +105,7 @@ if (!Array.prototype.reduce) {
 
 if (!Array.prototype.some) {
   Array.prototype.some = function some(callback, usersThisArg) {
-    var thisArg = usersThisArg === undefined ? globalThis : usersThisArg;
+    var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = thisArg;
     var result = false;
 
