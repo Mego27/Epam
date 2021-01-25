@@ -73,11 +73,11 @@ if (!Array.prototype.filter) {
 if (!Array.prototype.map) {
   Array.prototype.map = function map(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
-    var arr = thisArg;
+    var arr = this;
     var result = [];
 
-    arr.forEach(function fillCallbackedArray() {
-      result.push(callback.call(thisArg, arr[i], i, arr));
+    arr.forEach(function addTransformedItem(element, index, array) {
+      result.push(callback.call(thisArg, element, index, array));
     });
 
     return result;
