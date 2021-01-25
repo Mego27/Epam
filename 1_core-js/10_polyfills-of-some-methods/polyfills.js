@@ -44,7 +44,7 @@ if (!Array.prototype.every) {
     var arr = this;
     var result;
 
-    falseItem = arr.find(function setResultFalseIfCallbackReturnsFalse(element, index, array) {
+    var falseItem = arr.find(function setResultFalseIfCallbackReturnsFalse(element, index, array) {
       return !callback.call(thisArg, element, index, array);
     });
 
@@ -114,7 +114,7 @@ if (!Array.prototype.some2) {
     var arr = this;
     var result;
 
-    trueItem = arr.find(function isCallbacked(element, index, array) {
+    var trueItem = arr.find(function isCallbacked(element, index, array) {
       return callback.call(thisArg, element, index, array);
     });
 
