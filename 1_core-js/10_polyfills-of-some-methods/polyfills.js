@@ -108,17 +108,17 @@ if (!Array.prototype.reduce) {
   };
 }
 
-if (!Array.prototype.some) {
-  Array.prototype.some = function some(callback, usersThisArg) {
+if (!Array.prototype.some2) {
+  Array.prototype.some2 = function some2(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
-    var arr = thisArg;
-    var result = false;
+    var arr = this;
+    var result;
 
-    arr.forEach(function isCallbacked() {
-      if (callback.call(thisArg, arr[i], i, arr)) {
-        result = true;
-      }
+    trueItem = arr.find(function isCallbacked(element, index, array) {
+      return callback.call(thisArg, element, index, array);
     });
+
+    result = callback.call(thisArg, trueItem) || (trueItem !== undefined) ? true : false;
 
     return result;
   };
