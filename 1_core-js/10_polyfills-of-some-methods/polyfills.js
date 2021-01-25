@@ -25,17 +25,30 @@ if (!Array.prototype.forEach) {
   };
 }
 
+if (!Array.prototype.find) {
+  Array.prototype.find = function find(callback, usersThisArg) {
+    var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
+    var arr = this;
+
+    for (var i = 0; i < arr.length; i += 1) {
+      if (callback.call(thisArg, arr[i], i, arr)) {
+        return arr[i];
+      }
+    }
+  };
+}
+
 if (!Array.prototype.every) {
   Array.prototype.every = function every(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = this;
-    var result = true;
+    var result;
 
-    arr.forEach(function setResultFalseIfCallbackReturnsFalse(element, index, arr) {
-      if (!callback.call(thisArg, element, index, arr)) {
-        result = false;
-      }
+    falseItem = arr.find(function setResultFalseIfCallbackReturnsFalse(element, index, array) {
+      return !callback.call(thisArg, element, index, array);
     });
+
+    result = falseItem === undefined ? true : false; 
 
     return result;
   };
@@ -54,19 +67,6 @@ if (!Array.prototype.filter) {
     });
 
     return result;
-  };
-}
-
-if (!Array.prototype.find) {
-  Array.prototype.find = function find(callback, usersThisArg) {
-    var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
-    var arr = thisArg;
-
-    for (var i = 0; i < arr.length; i += 1) {
-      if (callback.call(thisArg, arr[i], i, arr)) {
-        return arr[i];
-      }
-    }
   };
 }
 
