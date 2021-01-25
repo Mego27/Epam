@@ -57,12 +57,12 @@ if (!Array.prototype.every) {
 if (!Array.prototype.filter) {
   Array.prototype.filter = function filter(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
-    var arr = thisArg;
+    var arr = this;
     var result = [];
 
-    arr.forEach(function fillArray() {
-      if (callback.call(thisArg, arr[i], i, arr)) {
-        result.push(arr[i]);
+    arr.forEach(function addItemForCallbackResultTrue(element, index, array) {
+      if (callback.call(thisArg, element, index, array)) {
+        result.push(array[index]);
       }
     });
 
