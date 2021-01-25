@@ -108,8 +108,8 @@ if (!Array.prototype.reduce) {
   };
 }
 
-if (!Array.prototype.some2) {
-  Array.prototype.some2 = function some2(callback, usersThisArg) {
+if (!Array.prototype.some) {
+  Array.prototype.some = function some(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = this;
     var result;
