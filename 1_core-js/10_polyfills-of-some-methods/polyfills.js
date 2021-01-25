@@ -3,10 +3,10 @@ var thisValue = this;
 if (!Function.prototype.bind) {
   Function.prototype.bind = function bind(context) {
     var func = this;
-    var args = Array.prototype.slice.call(arguments).slice(1);
+    var args = [].slice.call(arguments).slice(1);
 
     return function boundFunction() {
-      var extraArgs = Array.prototype.slice.call(arguments);
+      var extraArgs = [].slice.call(arguments);
       var allArgs = args.concat(extraArgs);
 
       return func.apply(context, allArgs);
