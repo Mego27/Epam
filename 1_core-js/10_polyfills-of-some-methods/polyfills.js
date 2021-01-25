@@ -17,7 +17,7 @@ if (!Function.prototype.bind) {
 if (!Array.prototype.forEach) {
   Array.prototype.forEach = function forEach(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
-    var arr = thisArg;
+    var arr = this;
 
     for (var i = 0; i < arr.length; i += 1) {
       callback.call(thisArg, arr[i], i, arr);
@@ -88,16 +88,21 @@ if (!Array.prototype.reduce) {
   Array.prototype.reduce = function reduce(callback, initialValue) {
     var arr = this;
     var result = initialValue;
-    var i = 0;
+    var index = 0;
 
     if (initialValue === undefined) {
-      i += 1;
+      index = 1;
       result = arr[0];
-    }
 
-    arr.forEach(function useCallback() {
-      result = callback(result, arr[i], i, arr);
-    });
+      for (index; index < arr.length; index += 1) {
+        result = callback(result, arr[index], index, arr);
+      }
+    } else {
+      arr.forEach(function useCallback() {
+        result = callback(result, arr[index], index, arr);
+        index += 1;
+      });
+    }
 
     return result;
   };
