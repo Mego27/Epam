@@ -28,11 +28,11 @@ if (!Array.prototype.forEach) {
 if (!Array.prototype.every) {
   Array.prototype.every = function every(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
-    var arr = thisArg;
+    var arr = this;
     var result = true;
 
-    arr.forEach(function isCallbacked() {
-      if (!callback.call(thisArg, arr[i], i, arr)) {
+    arr.forEach(function setResultFalseIfCallbackReturnsFalse(element, index, arr) {
+      if (!callback.call(thisArg, element, index, arr)) {
         result = false;
       }
     });
