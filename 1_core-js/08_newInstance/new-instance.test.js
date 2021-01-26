@@ -60,6 +60,6 @@ describe('testing newInstance', () => {
     const expectedResult = new Test();
     const actualResult = newInstance(Test);
 
-    expect(actualResult.__proto__).toStrictEqual(expectedResult.__proto__);
+    expect(actualResult.__proto__).toBe(expectedResult.__proto__);
   });
 });
