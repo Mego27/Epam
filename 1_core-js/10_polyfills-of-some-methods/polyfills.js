@@ -42,13 +42,13 @@ if (!Array.prototype.every) {
   Array.prototype.every = function every(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = this;
-    var result;
+    var result = true;
 
-    var falseItem = arr.find(function setResultFalseIfCallbackReturnsFalse(element, index, array) {
-      return !callback.call(thisArg, element, index, array);
-    });
-
-    result = falseItem === undefined ? true : false; 
+    for (var i = 0; i < arr.length; i += 1) {
+      if (!callback.call(thisArg, arr[i], i, arr)) {
+        result = false;
+      }
+    }
 
     return result;
   };
@@ -62,7 +62,7 @@ if (!Array.prototype.filter) {
 
     arr.forEach(function addItemForCallbackResultTrue(element, index, array) {
       if (callback.call(thisArg, element, index, array)) {
-        result.push(array[index]);
+        result.push(element);
       }
     });
 
@@ -114,11 +114,9 @@ if (!Array.prototype.some) {
     var arr = this;
     var result;
 
-    var trueItem = arr.find(function isCallbacked(element, index, array) {
-      return callback.call(thisArg, element, index, array);
-    });
+    var trueItem = arr.find(callback, thisArg);
 
-    result = callback.call(thisArg, trueItem) || (trueItem !== undefined) ? true : false;
+    result = callback.call(thisArg, trueItem);
 
     return result;
   };
