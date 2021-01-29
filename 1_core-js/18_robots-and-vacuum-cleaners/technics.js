@@ -6,7 +6,7 @@ function Device() {
     if (this.state === 'off') {
       this.state = 'on';
 
-      console.log(`Set On`);
+      console.log('Set On');
     }
   };
 
@@ -14,7 +14,7 @@ function Device() {
     if (this.state === 'on') {
       this.state = 'off';
 
-      console.log(`Set Off`);
+      console.log('Set Off');
     }
   };
 
@@ -102,6 +102,8 @@ function RobotCleaner() {
 
 RobotCleaner.prototype = vacuumCleaner;
 
+const robotCleaner = new RobotCleaner();
+
 function RobotSoldier() {
   this.mode = 'not fire';
 
@@ -109,7 +111,7 @@ function RobotSoldier() {
     if (this.state === 'on') {
       this.mode = 'fire';
 
-      console.log(`Robot fire`);
+      console.log('Robot fire');
     }
   };
 
@@ -117,7 +119,7 @@ function RobotSoldier() {
     if (this.state === 'on') {
       this.mode = 'not fire';
 
-      console.log(`Robot not fire`);
+      console.log('Robot not fire');
     }
   };
 }
