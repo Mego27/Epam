@@ -1,35 +1,37 @@
-const device = {
-  power: 0,
-  state: 'off',
+function Device() {
+  this.power = 0;
+  this.state = 'off';
 
-  on() {
+  this.on = function on() {
     if (this.state === 'off') {
       this.state = 'on';
 
       console.log(`Set On`);
     }
-  },
+  };
 
-  off() {
+  this.off = function off() {
     if (this.state === 'on') {
       this.state = 'off';
 
       console.log(`Set Off`);
     }
-  },
+  };
 
-  showInfo() {
+  this.showInfo = function showInfo() {
     if (this.state === 'on') {
       console.log(`Power - ${this.power}`);
     }
-  },
-};
+  };
+}
 
-const vacuumCleaner = {
-  power: 10,
-  mode: 'dry',
+const device = new Device();
 
-  changeMode() {
+function VacuumCleaner() {
+  this.power = 10;
+  this.mode = 'dry';
+
+  this.changeMode = function changeMode() {
     if (this.state === 'on') {
       if (this.mode === 'dry') {
         this.mode = 'wet';
@@ -39,77 +41,87 @@ const vacuumCleaner = {
 
       console.log(`Changed to ${this.mode}`);
     }
-  },
+  };
 
-  showInfo() {
+  this.showInfo = function showInfo() {
     if (this.state === 'on') {
       console.log(`Power - ${this.power}\nCurrent mode - ${this.mode}`);
     }
-  },
-};
-Object.setPrototypeOf(vacuumCleaner, device);
+  };
+}
 
-const robot = {
-  power: 20,
-  map: '',
+VacuumCleaner.prototype = device;
 
-  scanMap() {
+const vacuumCleaner = new VacuumCleaner();
+
+function Robot() {
+  this.power = 20;
+  this.map = '';
+
+  this.scanMap = function scanMap() {
     if (this.state === 'on') {
       this.map = 'some location';
 
       console.log('Scan map...');
     }
-  },
+  };
 
-  showInfo() {
+  this.showInfo = function showInfo() {
     if (this.state === 'on') {
       const haveMap = this.map !== '';
 
       console.log(`Power - ${this.power}\nHave map - ${haveMap}\nCurrent mode - ${this.mode}`);
     }
-  },
-};
-Object.setPrototypeOf(robot, device);
+  };
+}
 
-const robotSoldier = {
-  mode: 'not fire',
+Robot.prototype = device;
 
-  fireOn() {
+const robot = new Robot();
+
+function RobotCleaner() {
+  this.power = 20;
+  this.map = '';
+
+  this.scanMap = function scanMap() {
+    if (this.state === 'on') {
+      this.map = 'some location';
+
+      console.log('Scan map...');
+    }
+  };
+
+  this.showInfo = function showInfo() {
+    if (this.state === 'on') {
+      const haveMap = this.map !== '';
+
+      console.log(`Power - ${this.power}\nHave map - ${haveMap}\nCurrent mode - ${this.mode}`);
+    }
+  };
+}
+
+RobotCleaner.prototype = vacuumCleaner;
+
+function RobotSoldier() {
+  this.mode = 'not fire';
+
+  this.fireOn = function fireOn() {
     if (this.state === 'on') {
       this.mode = 'fire';
 
       console.log(`Robot fire`);
     }
-  },
+  };
 
-  fireOff() {
+  this.fireOff = function fireOff() {
     if (this.state === 'on') {
       this.mode = 'not fire';
 
       console.log(`Robot not fire`);
     }
-  },
-};
-Object.setPrototypeOf(robotSoldier, robot);
+  };
+}
 
-const robotCleaner = {
-  power: 20,
-  map: '',
+RobotSoldier.prototype = robot;
 
-  scanMap() {
-    if (this.state === 'on') {
-      this.map = 'some location';
-
-      console.log('Scan map...');
-    }
-  },
-
-  showInfo() {
-    if (this.state === 'on') {
-      const haveMap = this.map !== '';
-
-      console.log(`Power - ${this.power}\nHave map - ${haveMap}\nCurrent mode - ${this.mode}`);
-    }
-  },
-};
-Object.setPrototypeOf(robotCleaner, vacuumCleaner);
+const robotSoldier = new RobotSoldier();
