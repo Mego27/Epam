@@ -3,10 +3,10 @@ var thisValue = this;
 if (!Function.prototype.bind) {
   Function.prototype.bind = function bind(context) {
     var func = this;
-    var args = [].slice.call(arguments).slice(1);
+    var args = Array.prototype.slice.call(arguments, 1);
 
     return function boundFunction() {
-      var extraArgs = [].slice.call(arguments);
+      var extraArgs = Array.prototype.slice.call(arguments);
       var allArgs = args.concat(extraArgs);
 
       return func.apply(context, allArgs);
@@ -42,15 +42,14 @@ if (!Array.prototype.every) {
   Array.prototype.every = function every(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = this;
-    var result = true;
 
     for (var i = 0; i < arr.length; i += 1) {
       if (!callback.call(thisArg, arr[i], i, arr)) {
-        result = false;
+        return false;
       }
     }
 
-    return result;
+    return true;
   };
 }
 
@@ -112,12 +111,8 @@ if (!Array.prototype.some) {
   Array.prototype.some = function some(callback, usersThisArg) {
     var thisArg = usersThisArg === undefined ? thisValue : usersThisArg;
     var arr = this;
-    var result;
-
     var trueItem = arr.find(callback, thisArg);
 
-    result = callback.call(thisArg, trueItem);
-
-    return result;
+    return callback.call(thisArg, trueItem);
   };
 }
