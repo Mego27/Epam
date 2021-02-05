@@ -5,10 +5,24 @@ class ClientApp {
 
   getAvgTemperature(city, dayYear) {
     return new Promise((resolve, reject) => {
-      const randomDelay = Math.random() * 1000 + 500;
+      const randomDelay = Math.random() * 1500 + 500;
 
       setTimeout(() => {
-        resolve(this.server.getAvgTemperatureOfCity(city, dayYear));
+        let response;
+
+        if (!(this.server instanceof WeatherServer)) {
+          response = new Error('Отсутствует подключение к серверу!');
+        } if (randomDelay > 1500) {
+          response = new Error('Ответ сервера превысил 1,5 секунды!');
+        } else {
+          response = this.server.getAvgTemperatureOfCity(city, dayYear);
+        }
+
+        if (response instanceof Error) {
+          reject(response);
+        }
+
+        resolve(response);
       }, randomDelay);
     });
   }
@@ -42,6 +56,8 @@ class ClientApp {
       const message = `Город ${city}, ${day} ${month}, средняя температура: ${avgTemperature}`;
 
       console.log(message);
+    }).catch((error) => {
+      console.log(error.message);
     });
   }
 }

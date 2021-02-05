@@ -21,9 +21,23 @@ class WeatherServer {
   }
 
   getAvgTemperatureOfCity(userCity, dayYear) {
-    const infoCity = this.cities.find(([city]) => city === userCity);
-    const latitude = infoCity[2];
+    try {
+      const infoCity = this.cities.find(([city]) => city === userCity);
 
-    return (30 + latitude * ((182 - (202 - dayYear)) / 210 - 1)).toFixed(2);
+      if (infoCity === undefined) {
+        throw new Error('Данного города нет в базе данных!');
+      }
+
+      const latitude = infoCity[2];
+
+      if ((dayYear < 1) || (dayYear > 365)) {
+        throw new Error('Некорректный день года!');
+      }
+
+      return (30 + latitude * ((182 - (202 - dayYear)) / 210 - 1)).toFixed(2);
+    } catch (error) {
+      // console.log(error.message);
+      return error;
+    }
   }
 }
