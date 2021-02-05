@@ -1,19 +1,12 @@
 function defineType(properties, textOfMessage) {
   let resultType = 'information';
-  Object.entries(properties.keywordOfType).forEach(([type, word]) => {
-    if (textOfMessage.toLowerCase().includes(word)) {
+  Object.entries(properties.types).forEach(([type, { color, keyword }]) => {
+    if (textOfMessage.toLowerCase().includes(keyword)) {
       resultType = type;
     }
   });
 
   return resultType;
-}
-
-function selectColorByType(properties, type) {
-  const entries = Object.entries(properties.color).filter(([key, value]) => key === type);
-  const color = entries[0][1];
-
-  return color;
 }
 
 function print(textOfMessage, type, color, isPrintDate) {
@@ -23,7 +16,7 @@ function print(textOfMessage, type, color, isPrintDate) {
   console.log(fullText);
 }
 
-function printWithDelay(properties, textOfMessage, type, color, isPrintDate) {
+function timeLimitedPrint(properties, textOfMessage, type, color, isPrintDate) {
   if (!properties.isCoolDown) {
     properties.isCoolDown = true;
 
@@ -41,18 +34,13 @@ function ManagerOfMessages(
 ) {
   this.properties = {
     shouldPrintDate,
-    color: {
-      information: informationColor,
-      warning: warningColor,
-      error: errorColor,
-    },
-    keywordOfType: {
-      information: informationKeyword,
-      warning: warningKeyword,
-      error: errorKeyword,
-    },
     delay,
     isCoolDown: false,
+    types: {
+      information: { color: informationColor, keyword: informationKeyword },
+      warning: { color: warningColor, keyword: warningKeyword },
+      error: { color: errorColor, keyword: errorKeyword },
+    },
   };
 
   this.setDelay = function setDelay(delay) {
@@ -66,13 +54,13 @@ function ManagerOfMessages(
   this.printMessage = function printMessage(text) {
     const { properties } = this;
     const type = defineType(properties, text);
-    const color = selectColorByType(properties, type);
-    const { shouldPrintDate: isPrintDate } = properties;
+    const { color } = properties.types[type];
+    const { shouldPrintDate } = properties;
 
     if (this.properties.delay > 0) {
-      printWithDelay(properties, text, type, color, isPrintDate);
+      timeLimitedPrint(properties, text, type, color, shouldPrintDate);
     } else {
-      print(text, type, color, isPrintDate);
+      print(text, type, color, shouldPrintDate);
     }
   };
 }
