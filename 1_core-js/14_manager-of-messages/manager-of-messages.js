@@ -59,8 +59,8 @@ function ManagerOfMessages(
     this.properties.delay = delay;
   };
 
-  this.setShouldPrintDate = function setShouldPrintDate(booleanValue) {
-    this.properties.shouldPrintDate = booleanValue;
+  this.setShouldPrintDate = function setShouldPrintDate(shouldPrintDate) {
+    this.properties.shouldPrintDate = shouldPrintDate;
   };
 
   this.printMessage = function printMessage(text) {
