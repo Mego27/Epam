@@ -1,5 +1,3 @@
-import WeatherServer from './weather-server.js';
-
 class ClientApp {
   constructor(server) {
     this.server = server;

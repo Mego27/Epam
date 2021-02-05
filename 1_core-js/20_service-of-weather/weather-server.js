@@ -1,4 +1,4 @@
-export default class WeatherServer {
+class WeatherServer {
   constructor() {
     this.cities = [
       ['Кампала', 'Уганда', 0],
