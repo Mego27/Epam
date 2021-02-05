@@ -17,7 +17,8 @@ function selectColorByType(properties, type) {
 }
 
 function print(textOfMessage, type, color, isPrintDate) {
-  const fullText = isPrintDate ? `${new Date().toLocaleTimeString()}: ${type}(${color}): ${textOfMessage}` : `${type}(${color}): ${textOfMessage}`;
+  const generalText = `${type}(${color}): ${textOfMessage}`;
+  const fullText = isPrintDate ? `${new Date().toLocaleTimeString()}: ${generalText}` : generalText;
 
   console.log(fullText);
 }
