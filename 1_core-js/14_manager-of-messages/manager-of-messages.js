@@ -9,11 +9,13 @@ function defineType(properties, textOfMessage) {
   return resultType;
 }
 
-function print(textOfMessage, type, color, isPrintDate) {
-  const generalText = `${type}(${color}): ${textOfMessage}`;
-  const fullText = isPrintDate ? `${new Date().toLocaleTimeString()}: ${generalText}` : generalText;
+function print(textOfMessage, type, color, shouldPrintDate) {
+  const generalText = `${type}: ${textOfMessage}`;
+  const colorOfText = `color: ${color}`;
+  const fullText = shouldPrintDate ? `(${new Date().toLocaleTimeString()})${generalText}` : generalText;
+  const coloredfullText = `%c${fullText}`;
 
-  console.log(fullText);
+  console.log(coloredfullText, colorOfText);
 }
 
 function timeLimitedPrint(properties, textOfMessage, type, color, isPrintDate) {
