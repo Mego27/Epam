@@ -1,0 +1,18 @@
+@import './header.css';
+@import './footer.css';
+
+@font-face {
+    font-family: 'Arial'; 
+	src: url('../fonts/arial.ttf'); 
+}
+
+html {
+    font-size: 10px;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Arial';
+}
