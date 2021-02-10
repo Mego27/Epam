@@ -1,7 +1,7 @@
 function defineType(properties, textOfMessage) {
   let resultType = 'information';
-  Object.entries(properties.types).forEach(([type, { color, keyword }]) => {
-    if (textOfMessage.toLowerCase().includes(keyword)) {
+  Object.entries(properties.types).forEach(([type, { keyword }]) => {
+    if (textOfMessage.toLowerCase().includes(keyword.toLowerCase())) {
       resultType = type;
     }
   });
@@ -9,8 +9,11 @@ function defineType(properties, textOfMessage) {
   return resultType;
 }
 
-function print(textOfMessage, type, color, shouldPrintDate) {
-  const generalText = `${type}: ${textOfMessage}`;
+function print(properties, text) {
+  const type = defineType(properties, text);
+  const { color } = properties.types[type];
+  const { shouldPrintDate } = properties;
+  const generalText = `${type}: ${text}`;
   const colorOfText = `color: ${color}`;
   const fullText = shouldPrintDate ? `(${new Date().toLocaleTimeString()})${generalText}` : generalText;
   const coloredfullText = `%c${fullText}`;
@@ -18,23 +21,27 @@ function print(textOfMessage, type, color, shouldPrintDate) {
   console.log(coloredfullText, colorOfText);
 }
 
-function timeLimitedPrint(properties, textOfMessage, type, color, isPrintDate) {
-  if (!properties.isCoolDown) {
-    properties.isCoolDown = true;
+function timeLimitedPrint(properties, text) {
+  if (properties.delay > 0) {
+    if (!properties.isCoolDown) {
+      properties.isCoolDown = true;
 
-    print(textOfMessage, type, color, isPrintDate);
+      print(properties, text);
 
-    setTimeout(() => (properties.isCoolDown = false), properties.delay);
+      setTimeout(() => (properties.isCoolDown = false), properties.delay);
+    }
+  } else {
+    print(properties, text);
   }
 }
 
-function ManagerOfMessages(
+function createManagerOfMessages(
   { informationColor, warningColor, errorColor },
   { informationKeyword, warningKeyword, errorKeyword },
   shouldPrintDate,
   delay,
 ) {
-  this.properties = {
+  const properties = {
     shouldPrintDate,
     delay,
     isCoolDown: false,
@@ -45,24 +52,21 @@ function ManagerOfMessages(
     },
   };
 
-  this.setDelay = function setDelay(delay) {
-    this.properties.delay = delay;
+  const setDelay = function setDelay(delay) {
+    properties.delay = delay;
   };
 
-  this.setShouldPrintDate = function setShouldPrintDate(shouldPrintDate) {
-    this.properties.shouldPrintDate = shouldPrintDate;
+  const setShouldPrintDate = function setShouldPrintDate(shouldPrintDate) {
+    properties.shouldPrintDate = shouldPrintDate;
   };
 
-  this.printMessage = function printMessage(text) {
-    const { properties } = this;
-    const type = defineType(properties, text);
-    const { color } = properties.types[type];
-    const { shouldPrintDate } = properties;
+  const printMessage = function printMessage(text) {
+    timeLimitedPrint(properties, text);
+  };
 
-    if (this.properties.delay > 0) {
-      timeLimitedPrint(properties, text, type, color, shouldPrintDate);
-    } else {
-      print(text, type, color, shouldPrintDate);
-    }
+  return {
+    setDelay,
+    setShouldPrintDate,
+    printMessage,
   };
 }
