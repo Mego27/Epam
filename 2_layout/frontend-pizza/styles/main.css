@@ -1,0 +1,171 @@
+@font-face {
+    font-family: 'Roboto-Light'; 
+	src: url('../fonts/Roboto-Light.ttf');
+}
+@font-face {
+    font-family: 'Roboto-Medium'; 
+	src: url('../fonts/Roboto-Medium.ttf'); 
+}
+@font-face {
+    font-family: 'Roboto-Regular'; 
+	src: url('../fonts/Roboto-Regular.ttf');
+}
+@font-face {
+    font-family: 'Arial'; 
+    src: url('../fonts/arial.ttf'); 
+}
+@font-face {
+    font-family: 'Arial-Bold-Italic'; 
+	src: url('../fonts/arialbi.ttf'); 
+}
+@font-face {
+    font-family: 'Arial-Italic'; 
+	src: url('../fonts/ariali.ttf'); 
+}
+
+
+.main__container {
+    background-image: url('../images/background-pattern.png');
+    background-color: #3b3b3b;
+    background-repeat: repeat;
+}
+.main__container-content {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.slider {
+    background-image: url('../images/italian-pizza.png');
+    height: 580px;
+    position: relative;
+}
+.slider__content {
+    box-sizing: border-box;
+    width: 44%;
+    min-width: max-content;
+    height: 100%;
+    padding: 0 60px 0 95px;
+    background-color: rgba(0, 0, 0, .8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.slider__text {
+    color: white;
+}
+.slider__text-overhead {
+    font-family: 'Roboto-Light';
+    font-size: 3.2rem;
+    opacity: .67;
+}
+.slider__text-title {
+    font-family: 'Arial-Bold-Italic';
+    font-size: 4.8rem;
+    margin: 30px 0 15px;
+}
+.slider__text-subtitle {
+    font-family: 'Arial-Italic';
+    font-size: 1.7rem;
+    opacity: .67;
+}
+.slider__button-container {
+    width: 100%;
+}
+.slider__button {
+    text-decoration: none;
+    font-size: 2.1rem;
+    font-family: 'Roboto-Medium';
+    border: 0;
+    border-radius: 3px;
+    padding: 20px 40px;
+    background-color: #ffd906;
+    text-transform: uppercase;
+    color: #333;
+    display: block;
+    margin: 30px 0 0 auto;
+    transition: all .2s ease-in;
+}
+.slider__button:hover {
+    background-color: #ffe733;
+    color: #111;
+    cursor: pointer;
+}
+.slider__arrow {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -35px;
+    background-color: rgba(214, 214, 214, .8);
+    overflow-x: hidden;
+    border: none;
+    outline: none;
+    transition: all .1s ease-in;
+}
+.slider__arrow:hover {
+    cursor: pointer;
+    background-color: #fff;
+}
+.slider__arrow-svg {
+    width: 15px;
+    height: 30px;
+}
+.slider__arrow--direction-left {
+    left: 0px;
+}
+.slider__arrow--direction-right {
+    right: 0px;
+}
+
+.main__slider-points {
+    display: flex;
+    justify-content: space-between;
+}
+.main__slider-point {
+    margin: 10px 0;
+    padding: 7px 0px;
+    border: none;
+    width: 32.4%;
+    outline: none;
+}
+.main__slider-point:hover {
+    cursor: pointer;
+}
+.main__slider-point:focus {
+    background-color: #ffd906;
+}
+
+.main__menu {
+    margin: 30px 0 22px;
+}
+.main__menu-title {
+    color: white;
+    font-family: 'Arial-Italic';
+    font-size: 3.2rem;
+}
+.main__sorting-and-pizzas {
+    width: 75%;
+}
+.sorting__container {
+    margin: 22px 0 0;
+    list-style: none;
+    color: white;
+    font-family: 'Roboto-Regular';
+}
+.sorting__item {
+    display: inline-block;
+    margin: 0 5px;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 15px;
+    font-size: 1.7rem;
+    transition: all .2s ease-in;
+}
+.sorting__item:hover {
+    color: #ffd906;
+    border-color: #ffd906;
+    cursor: pointer;
+}
