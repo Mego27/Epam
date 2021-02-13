@@ -21,15 +21,19 @@ function print(properties, text) {
   console.log(coloredfullText, colorOfText);
 }
 
+function throttledPrint(properties, text) {
+  if (!properties.isCoolDown) {
+    properties.isCoolDown = true;
+
+    print(properties, text);
+
+    setTimeout(() => (properties.isCoolDown = false), properties.delay);
+  }
+}
+
 function timeLimitedPrint(properties, text) {
   if (properties.delay > 0) {
-    if (!properties.isCoolDown) {
-      properties.isCoolDown = true;
-
-      print(properties, text);
-
-      setTimeout(() => (properties.isCoolDown = false), properties.delay);
-    }
+    throttledPrint(properties, text);
   } else {
     print(properties, text);
   }
