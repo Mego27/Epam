@@ -7,6 +7,10 @@
 	src: url('../fonts/Roboto-Medium.ttf'); 
 }
 @font-face {
+    font-family: 'Roboto-Bold'; 
+	src: url('../fonts/Roboto-Bold.ttf'); 
+}
+@font-face {
     font-family: 'Roboto-Regular'; 
 	src: url('../fonts/Roboto-Regular.ttf');
 }
@@ -146,7 +150,7 @@
     font-family: 'Arial-Italic';
     font-size: 3.2rem;
 }
-.main__sorting-and-pizzas {
+.main__sorting-and-products {
     width: 75%;
 }
 .sorting__container {
@@ -168,4 +172,117 @@
     color: #ffd906;
     border-color: #ffd906;
     cursor: pointer;
+}
+
+.products {
+
+}
+.products__container {
+    margin: 16px 10px 0 0;
+    display: flex;
+    /* justify-conten
+    align-items: stretch; */
+    flex-wrap: wrap;
+}
+.products__item {
+    width: 32%;
+    max-width: 285px;
+    margin: 5px;
+}
+.product__container {
+    border-radius: 10px;
+    overflow: hidden;
+}
+.product__image-container {
+    height: 225px;
+    overflow: hidden;
+}
+.product__description {
+    color: black;
+    background-color: white;
+}
+.product__description-container {
+    padding: 20px 15px 15px 15px;
+}
+.product__title {
+    font-family: 'Arial-Bold-Italic';
+    color: #333;
+    font-size: 2.6rem;
+}
+.product__composition {
+    font-family: 'Arial-Italic';
+    color: #333;
+    font-size: 1.7rem;
+}
+.product__composition-list {
+    margin: 10px 0 50px;
+}
+.product__composition-item {
+    list-style: square inside;
+}
+.product__sizes {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 15px;
+    background-color: #565656;
+    border: 2px solid #565656;
+}
+.product__sizes [type='radio'] {
+    display: none;
+}
+.product_sizes-label {
+    display: flex;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.7rem;
+    font-family: 'Roboto-Medium';
+}
+.product_sizes-label:hover {
+    cursor: pointer;
+}
+.product_sizes-text {
+    color: white;
+    display: block;
+    width: 100%;
+    border-radius: 15px;
+    transition: all .3s ease-in;
+}
+.product__sizes input[type='radio']:checked ~ .product_sizes-text {
+    background-color: #ffd906;
+    color: #333;
+}
+.product__sizes input[type='radio']:checked ~ .product_sizes-text::after {
+    content: ' см';
+}
+.product__price-and-adding-button {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+.product__price {
+    font-family: 'Roboto-Bold';
+    font-size: 2.6rem;
+    color: #565656;
+    text-align: center;
+    width: 100%;
+}
+.product__adding-button {
+    font-family: 'Roboto-Bold';
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    color: white;
+    background-color: #c83737;
+    border: none;
+    outline: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin: 0 0 0 auto;
+    white-space: nowrap;
+    transition: all .2s ease-in;
+}
+.product__adding-button:hover {
+    cursor: pointer;
+    background-color: #ff3a3a;
 }
