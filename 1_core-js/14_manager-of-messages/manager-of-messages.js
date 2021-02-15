@@ -21,21 +21,15 @@ function print(properties, text) {
   console.log(coloredfullText, colorOfText);
 }
 
-function throttledPrint(properties, text) {
-  if (!properties.isCoolDown) {
+function timeLimitedPrint(properties, text) {
+  if (properties.delay <= 0) {
+    print(properties, text);
+  } else if (!properties.isCoolDown) {
     properties.isCoolDown = true;
 
     print(properties, text);
 
     setTimeout(() => (properties.isCoolDown = false), properties.delay);
-  }
-}
-
-function timeLimitedPrint(properties, text) {
-  if (properties.delay > 0) {
-    throttledPrint(properties, text);
-  } else {
-    print(properties, text);
   }
 }
 
