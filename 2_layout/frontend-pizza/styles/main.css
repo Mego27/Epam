@@ -180,8 +180,7 @@
 .products__container {
     margin: 16px 10px 0 0;
     display: flex;
-    /* justify-conten
-    align-items: stretch; */
+    align-items: stretch;
     flex-wrap: wrap;
 }
 .products__item {
@@ -210,12 +209,10 @@
     font-size: 2.6rem;
 }
 .product__composition {
+    margin-top: 10px;
     font-family: 'Arial-Italic';
     color: #333;
     font-size: 1.7rem;
-}
-.product__composition-list {
-    margin: 10px 0 50px;
 }
 .product__composition-item {
     list-style: square inside;
@@ -257,7 +254,6 @@
     content: ' см';
 }
 .product__price-and-adding-button {
-    margin-top: 15px;
     display: flex;
     align-items: center;
 }
