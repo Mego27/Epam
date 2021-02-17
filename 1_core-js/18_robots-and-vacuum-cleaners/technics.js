@@ -68,9 +68,10 @@ function Robot() {
 
   this.showInfo = function showInfo() {
     if (this.state === 'on') {
-      const haveMap = this.map !== '';
+      const map = this.map || 'not installed';
+      const message = `Power - ${this.power}\nMap - ${map}\nCurrent mode - ${this.mode}`;
 
-      console.log(`Power - ${this.power}\nHave map - ${haveMap}\nCurrent mode - ${this.mode}`);
+      console.log(message);
     }
   };
 }
@@ -94,8 +95,9 @@ function RobotCleaner() {
   this.showInfo = function showInfo() {
     if (this.state === 'on') {
       const map = this.map || 'not installed';
+      const message = `Power - ${this.power}\nMap - ${map}\nCurrent mode - ${this.mode}`;
 
-      console.log(`Power - ${this.power}\nMap - ${map}\nCurrent mode - ${this.mode}`);
+      console.log(message);
     }
   };
 }
