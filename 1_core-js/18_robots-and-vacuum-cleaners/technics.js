@@ -1,5 +1,5 @@
-function Device() {
-  this.power = 0;
+function Device(power) {
+  this.power = power;
   this.state = false;
 
   this.on = function on() {
@@ -25,10 +25,10 @@ function Device() {
   };
 }
 
-const device = new Device();
+const device = new Device(0);
 
-function VacuumCleaner() {
-  this.power = 10;
+function VacuumCleaner(power) {
+  this.power = power;
   this.mode = 'dry';
 
   this.changeMode = function changeMode() {
@@ -52,9 +52,9 @@ function VacuumCleaner() {
 
 VacuumCleaner.prototype = device;
 
-const vacuumCleaner = new VacuumCleaner();
+const vacuumCleaner = new VacuumCleaner(10);
 
-function Robot() {
+function Robot(power) {
   this.power = 20;
   this.map = '';
 
@@ -78,10 +78,10 @@ function Robot() {
 
 Robot.prototype = device;
 
-const robot = new Robot();
+const robot = new Robot(20);
 
-function RobotCleaner() {
-  this.power = 20;
+function RobotCleaner(power) {
+  this.power = power;
   this.map = '';
 
   this.scanMap = function scanMap() {
@@ -104,9 +104,10 @@ function RobotCleaner() {
 
 RobotCleaner.prototype = vacuumCleaner;
 
-const robotCleaner = new RobotCleaner();
+const robotCleaner = new RobotCleaner(20);
 
-function RobotSoldier() {
+function RobotSoldier(power) {
+  this.power = power
   this.mode = 'not fire';
 
   this.fireOn = function fireOn() {
@@ -128,4 +129,6 @@ function RobotSoldier() {
 
 RobotSoldier.prototype = robot;
 
-const robotSoldier = new RobotSoldier();
+const robotSoldier = new RobotSoldier(30);
+robotSoldier.on();
+robotSoldier.showInfo();
