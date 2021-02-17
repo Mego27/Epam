@@ -1,25 +1,25 @@
 function Device() {
   this.power = 0;
-  this.state = 'off';
+  this.state = false;
 
   this.on = function on() {
-    if (this.state === 'off') {
-      this.state = 'on';
+    if (!this.state) {
+      this.state = true;
 
       console.log('Set On');
     }
   };
 
   this.off = function off() {
-    if (this.state === 'on') {
-      this.state = 'off';
+    if (this.state) {
+      this.state = false;
 
       console.log('Set Off');
     }
   };
 
   this.showInfo = function showInfo() {
-    if (this.state === 'on') {
+    if (this.state) {
       console.log(`Power - ${this.power}`);
     }
   };
@@ -32,7 +32,7 @@ function VacuumCleaner() {
   this.mode = 'dry';
 
   this.changeMode = function changeMode() {
-    if (this.state === 'on') {
+    if (this.state) {
       if (this.mode === 'dry') {
         this.mode = 'wet';
       } else {
@@ -44,7 +44,7 @@ function VacuumCleaner() {
   };
 
   this.showInfo = function showInfo() {
-    if (this.state === 'on') {
+    if (this.state) {
       console.log(`Power - ${this.power}\nCurrent mode - ${this.mode}`);
     }
   };
@@ -59,7 +59,7 @@ function Robot() {
   this.map = '';
 
   this.scanMap = function scanMap() {
-    if (this.state === 'on') {
+    if (this.state) {
       this.map = 'some location';
 
       console.log('Scan map...');
@@ -67,7 +67,7 @@ function Robot() {
   };
 
   this.showInfo = function showInfo() {
-    if (this.state === 'on') {
+    if (this.state) {
       const map = this.map || 'not installed';
       const message = `Power - ${this.power}\nMap - ${map}\nCurrent mode - ${this.mode}`;
 
@@ -85,7 +85,7 @@ function RobotCleaner() {
   this.map = '';
 
   this.scanMap = function scanMap() {
-    if (this.state === 'on') {
+    if (this.state) {
       this.map = 'some location';
 
       console.log('Scan map...');
@@ -93,7 +93,7 @@ function RobotCleaner() {
   };
 
   this.showInfo = function showInfo() {
-    if (this.state === 'on') {
+    if (this.state) {
       const map = this.map || 'not installed';
       const message = `Power - ${this.power}\nMap - ${map}\nCurrent mode - ${this.mode}`;
 
@@ -110,7 +110,7 @@ function RobotSoldier() {
   this.mode = 'not fire';
 
   this.fireOn = function fireOn() {
-    if (this.state === 'on') {
+    if (this.state) {
       this.mode = 'fire';
 
       console.log('Robot fire');
@@ -118,7 +118,7 @@ function RobotSoldier() {
   };
 
   this.fireOff = function fireOff() {
-    if (this.state === 'on') {
+    if (this.state) {
       this.mode = 'not fire';
 
       console.log('Robot not fire');
