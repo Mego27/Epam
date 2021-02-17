@@ -130,5 +130,3 @@ function RobotSoldier(power) {
 RobotSoldier.prototype = robot;
 
 const robotSoldier = new RobotSoldier(30);
-robotSoldier.on();
-robotSoldier.showInfo();
