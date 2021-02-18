@@ -1,132 +1,143 @@
 function Device(power) {
   this.power = power;
   this.state = false;
+}
 
-  this.on = function on() {
+Device.prototype = {
+  on() {
     if (!this.state) {
       this.state = true;
 
       console.log('Set On');
     }
-  };
-
-  this.off = function off() {
+  },
+  off() {
     if (this.state) {
       this.state = false;
 
       console.log('Set Off');
     }
-  };
-
-  this.showInfo = function showInfo() {
+  },
+  showInfo() {
     if (this.state) {
       console.log(`Power - ${this.power}`);
     }
-  };
-}
-
-const device = new Device(0);
+  },
+};
 
 function VacuumCleaner(power) {
-  this.power = power;
+  Device.call(this, power);
   this.mode = 'dry';
-
-  this.changeMode = function changeMode() {
-    if (this.state) {
-      if (this.mode === 'dry') {
-        this.mode = 'wet';
-      } else {
-        this.mode = 'dry';
-      }
-
-      console.log(`Changed to ${this.mode}`);
-    }
-  };
-
-  this.showInfo = function showInfo() {
-    if (this.state) {
-      console.log(`Power - ${this.power}\nCurrent mode - ${this.mode}`);
-    }
-  };
 }
 
-VacuumCleaner.prototype = device;
+VacuumCleaner.prototype = Object.create(Device.prototype, {
+  changeMode: {
+    value: function changeMode() {
+      if (this.state) {
+        if (this.mode === 'dry') {
+          this.mode = 'wet';
+        } else {
+          this.mode = 'dry';
+        }
+
+        console.log(`Changed to ${this.mode}`);
+      }
+    },
+  },
+
+  showInfo: {
+    value: function showInfo() {
+      if (this.state) {
+        console.log(`Power - ${this.power}\nCurrent mode - ${this.mode}`);
+      }
+    },
+  },
+});
+VacuumCleaner.prototype.constructor = VacuumCleaner;
 
 const vacuumCleaner = new VacuumCleaner(10);
 
 function Robot(power) {
-  this.power = 20;
-  this.map = '';
-
-  this.scanMap = function scanMap() {
-    if (this.state) {
-      this.map = 'some location';
-
-      console.log('Scan map...');
-    }
-  };
-
-  this.showInfo = function showInfo() {
-    if (this.state) {
-      const map = this.map || 'not installed';
-      const message = `Power - ${this.power}\nMap - ${map}\nCurrent mode - ${this.mode}`;
-
-      console.log(message);
-    }
-  };
+  Device.call(this, power);
+  this.map = 'not installed';
 }
 
-Robot.prototype = device;
+Robot.prototype = Object.create(Device.prototype, {
+  scanMap: {
+    value: function scanMap() {
+      if (this.state) {
+        this.map = 'some location';
 
-const robot = new Robot(20);
+        console.log('Scan map...');
+      }
+    },
+  },
+
+  showInfo: {
+    value: function showInfo() {
+      if (this.state) {
+        const message = `Power - ${this.power}\nMap - ${this.map}\nCurrent mode - ${this.mode}`;
+
+        console.log(message);
+      }
+    },
+  },
+});
 
 function RobotCleaner(power) {
-  this.power = power;
-  this.map = '';
-
-  this.scanMap = function scanMap() {
-    if (this.state) {
-      this.map = 'some location';
-
-      console.log('Scan map...');
-    }
-  };
-
-  this.showInfo = function showInfo() {
-    if (this.state) {
-      const map = this.map || 'not installed';
-      const message = `Power - ${this.power}\nMap - ${map}\nCurrent mode - ${this.mode}`;
-
-      console.log(message);
-    }
-  };
+  VacuumCleaner.call(this, power);
+  this.map = 'not installed';
 }
 
-RobotCleaner.prototype = vacuumCleaner;
+RobotCleaner.prototype = Object.create(VacuumCleaner.prototype, {
+  scanMap: {
+    value: function scanMap() {
+      if (this.state) {
+        this.map = 'some location';
+
+        console.log('Scan map...');
+      }
+    },
+  },
+
+  showInfo: {
+    value: function showInfo() {
+      if (this.state) {
+        const message = `Power - ${this.power}\nMap - ${this.map}\nCurrent mode - ${this.mode}`;
+
+        console.log(message);
+      }
+    },
+  },
+});
 
 const robotCleaner = new RobotCleaner(20);
 
 function RobotSoldier(power) {
-  this.power = power
+  Robot.call(this, power);
   this.mode = 'not fire';
-
-  this.fireOn = function fireOn() {
-    if (this.state) {
-      this.mode = 'fire';
-
-      console.log('Robot fire');
-    }
-  };
-
-  this.fireOff = function fireOff() {
-    if (this.state) {
-      this.mode = 'not fire';
-
-      console.log('Robot not fire');
-    }
-  };
 }
 
-RobotSoldier.prototype = robot;
+RobotSoldier.prototype = Object.create(Robot.prototype, {
+  fireOn: {
+    value: function fireOn() {
+      if (this.state) {
+        this.mode = 'fire';
+
+        console.log('Robot fire');
+      }
+    },
+  },
+
+  fireOff: {
+    value: function fireOff() {
+      if (this.state) {
+        this.mode = 'not fire';
+
+        console.log('Robot not fire');
+      }
+    },
+  },
+});
 
 const robotSoldier = new RobotSoldier(30);
