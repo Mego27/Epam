@@ -115,7 +115,7 @@ class Monster {
   }
 
   attack(target, actionOfTarget) {
-    if (this.healthPoints > 0) {
+    if (this.healthPoints <= 0) {
       const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
 
       console.log(healthErrorMessage);
