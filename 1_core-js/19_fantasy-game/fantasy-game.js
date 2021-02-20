@@ -7,6 +7,7 @@ const arena = [];
 class Warrior {
   constructor(name, arena) {
     this.name = name;
+    this.type = 'warrior';
     this.healthPoints = getRandomIntInRange(10, 100);
     this.minAttackDamage = getRandomIntInRange(1, 20);
     this.maxAttackDamage = getRandomIntInRange(20, 40);
@@ -36,7 +37,7 @@ class Warrior {
       console.log(amountOfDamageMessage);
       console.log(remainingHealthMessage);
 
-      if (enemy instanceof Monster) {
+      if (enemy.type === 'monster') {
         this.isAttackMonster = true;
 
         enemy.attack(this, 'attack');
@@ -52,6 +53,7 @@ class Warrior {
 class Healer {
   constructor(name, arena) {
     this.name = name;
+    this.type = 'healer';
     this.healthPoints = getRandomIntInRange(10, 100);
     this.minHealingPower = getRandomIntInRange(1, 20);
     this.maxHealingPower = getRandomIntInRange(20, 40);
@@ -80,11 +82,11 @@ class Healer {
       console.log(amountOfHealthMessage);
       console.log(remainingHealthMessage);
 
-      if (target instanceof Monster) {
+      if (target.type === 'monster') {
         target.attack(this, 'heal');
-      } else if ((target instanceof Warrior) && target.isAttackMonster) {
+      } else if ((target.type === 'warrior') && target.isAttackMonster) {
         const monsters = arena
-          .filter((entry) => (entry instanceof Monster) && (entry.healthPoints > 0));
+          .filter((entry) => (entry.type === 'monster') && (entry.healthPoints > 0));
         const randomMonsterIndex = getRandomIntInRange(0, monsters.length - 1);
         const monster = monsters[randomMonsterIndex];
 
@@ -107,6 +109,7 @@ class Healer {
 class Monster {
   constructor(name, arena) {
     this.name = name;
+    this.type = 'monster';
     this.healthPoints = getRandomIntInRange(10, 100);
     this.minAttackDamage = getRandomIntInRange(1, 20);
     this.maxAttackDamage = getRandomIntInRange(20, 40);
