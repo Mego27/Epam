@@ -1,15 +1,22 @@
+// eslint-disable-next-line max-classes-per-file
 function getRandomIntInRange(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function Warrior(name, arena) {
-  this.name = name;
-  this.healthPoints = getRandomIntInRange(10, 100);
-  this.minAttackDamage = getRandomIntInRange(1, 20);
-  this.maxAttackDamage = getRandomIntInRange(20, 40);
-  this.isAttackMonster = false;
+const arena = [];
 
-  this.attack = function attack(enemyName) {
+class Warrior {
+  constructor(name, arena) {
+    this.name = name;
+    this.healthPoints = getRandomIntInRange(10, 100);
+    this.minAttackDamage = getRandomIntInRange(1, 20);
+    this.maxAttackDamage = getRandomIntInRange(20, 40);
+    this.isAttackMonster = false;
+
+    arena.push(this);
+  }
+
+  attack(enemyName) {
     if (this.healthPoints <= 0) {
       const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
 
@@ -40,18 +47,20 @@ function Warrior(name, arena) {
 
       console.log(searchingErrorMessage);
     }
-  };
-
-  arena.push(this);
+  }
 }
 
-function Healer(name, arena) {
-  this.name = name;
-  this.healthPoints = getRandomIntInRange(10, 100);
-  this.minHealingPower = getRandomIntInRange(1, 20);
-  this.maxHealingPower = getRandomIntInRange(20, 40);
+class Healer {
+  constructor(name, arena) {
+    this.name = name;
+    this.healthPoints = getRandomIntInRange(10, 100);
+    this.minHealingPower = getRandomIntInRange(1, 20);
+    this.maxHealingPower = getRandomIntInRange(20, 40);
 
-  this.heal = function heal(targetName) {
+    arena.push(this);
+  }
+
+  heal(targetName) {
     if (this.healthPoints <= 0) {
       const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
 
@@ -93,18 +102,20 @@ function Healer(name, arena) {
 
       console.log(searchingErrorMessage);
     }
-  };
-
-  arena.push(this);
+  }
 }
 
-function Monster(name, arena) {
-  this.name = name;
-  this.healthPoints = getRandomIntInRange(10, 100);
-  this.minAttackDamage = getRandomIntInRange(1, 20);
-  this.maxAttackDamage = getRandomIntInRange(20, 40);
+class Monster {
+  constructor(name, arena) {
+    this.name = name;
+    this.healthPoints = getRandomIntInRange(10, 100);
+    this.minAttackDamage = getRandomIntInRange(1, 20);
+    this.maxAttackDamage = getRandomIntInRange(20, 40);
 
-  this.attack = function attack(target, actionOfTarget) {
+    arena.push(this);
+  }
+
+  attack(target, actionOfTarget) {
     if (this.healthPoints > 0) {
       const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
 
@@ -134,12 +145,9 @@ function Monster(name, arena) {
 
     console.log(amountOfDamageMessage);
     console.log(remainingHealthMessage);
-  };
-
-  arena.push(this);
+  }
 }
 
-const arena = [];
 const warrior = new Warrior('warrior', arena);
 const healer = new Healer('healer', arena);
 const monster = new Monster('monster', arena);
