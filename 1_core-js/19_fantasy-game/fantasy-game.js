@@ -10,26 +10,28 @@ function Warrior(name, arena) {
   this.isAttackMonster = false;
 
   this.attack = function attack(enemyName) {
-    if (this.healthPoints > 0) {
-      const damage = getRandomIntInRange(this.minAttackDamage, this.maxAttackDamage);
-      const enemy = arena.find((entry) => entry.name === enemyName);
+    if (this.healthPoints <= 0) {
+      console.log(`${this.name} погиб и не может совершать действия!`);
 
-      if (enemy !== undefined) {
-        enemy.healthPoints -= damage;
+      return;
+    }
 
-        console.log(`${this.name} нанёс ${damage} урона ${enemyName}`);
-        console.log(`У ${enemyName} осталось ${enemy.healthPoints} единиц здоровья`);
+    const damage = getRandomIntInRange(this.minAttackDamage, this.maxAttackDamage);
+    const enemy = arena.find((entry) => entry.name === enemyName);
 
-        if (enemy instanceof Monster) {
-          this.isAttackMonster = true;
+    if (enemy !== undefined) {
+      enemy.healthPoints -= damage;
 
-          enemy.attack(this, 'attack');
-        }
-      } else {
-        console.log('Такой цели не найдено!');
+      console.log(`${this.name} нанёс ${damage} урона ${enemyName}`);
+      console.log(`У ${enemyName} осталось ${enemy.healthPoints} единиц здоровья`);
+
+      if (enemy instanceof Monster) {
+        this.isAttackMonster = true;
+
+        enemy.attack(this, 'attack');
       }
     } else {
-      console.log(`${this.name} погиб и не может совершать действия!`);
+      console.log('Такой цели не найдено!');
     }
   };
 
@@ -43,35 +45,37 @@ function Healer(name, arena) {
   this.maxHealingPower = getRandomIntInRange(20, 40);
 
   this.heal = function heal(targetName) {
-    if (this.healthPoints > 0) {
-      const healingPower = getRandomIntInRange(this.minHealingPower, this.maxHealingPower);
-      const target = arena.find((entry) => entry.name === targetName);
+    if (this.healthPoints <= 0) {
+      console.log(`${this.name} погиб и не может совершать действия!`);
 
-      if (target !== undefined) {
-        target.healthPoints += healingPower;
+      return;
+    }
 
-        console.log(`${this.name} вылечил на ${healingPower} единиц здоровья ${targetName}`);
-        console.log(`У ${targetName} стало ${target.healthPoints} единиц здоровья`);
+    const healingPower = getRandomIntInRange(this.minHealingPower, this.maxHealingPower);
+    const target = arena.find((entry) => entry.name === targetName);
 
-        if (target instanceof Monster) {
-          target.attack(this, 'heal');
-        } else if ((target instanceof Warrior) && target.isAttackMonster) {
-          const monsters = arena
-            .filter((entry) => (entry instanceof Monster) && (entry.healthPoints > 0));
-          const randomMonsterIndex = getRandomIntInRange(0, monsters.length - 1);
-          const monster = monsters[randomMonsterIndex];
+    if (target !== undefined) {
+      target.healthPoints += healingPower;
 
-          if (monster !== undefined) {
-            monster.attack(this, 'healEnemy');
-          } else {
-            console.log('Живых монстров не осталось');
-          }
+      console.log(`${this.name} вылечил на ${healingPower} единиц здоровья ${targetName}`);
+      console.log(`У ${targetName} стало ${target.healthPoints} единиц здоровья`);
+
+      if (target instanceof Monster) {
+        target.attack(this, 'heal');
+      } else if ((target instanceof Warrior) && target.isAttackMonster) {
+        const monsters = arena
+          .filter((entry) => (entry instanceof Monster) && (entry.healthPoints > 0));
+        const randomMonsterIndex = getRandomIntInRange(0, monsters.length - 1);
+        const monster = monsters[randomMonsterIndex];
+
+        if (monster !== undefined) {
+          monster.attack(this, 'healEnemy');
+        } else {
+          console.log('Живых монстров не осталось');
         }
-      } else {
-        console.log('Такой цели не найдено!');
       }
     } else {
-      console.log(`${this.name} погиб и не может совершать действия!`);
+      console.log('Такой цели не найдено!');
     }
   };
 
@@ -86,27 +90,29 @@ function Monster(name, arena) {
 
   this.attack = function attack(target, actionOfTarget) {
     if (this.healthPoints > 0) {
-      const damage = getRandomIntInRange(this.minAttackDamage, this.maxAttackDamage);
-
-      let enemy;
-
-      if ((actionOfTarget === 'attack') || (actionOfTarget === 'healEnemy')) {
-        enemy = target;
-      } else {
-        const aviableToAttackEntries = arena
-          .filter((entry) => (entry !== this) && (entry !== target));
-        const randomEnemyIndex = getRandomIntInRange(0, aviableToAttackEntries.length - 1);
-
-        enemy = arena[randomEnemyIndex];
-      }
-
-      enemy.healthPoints -= damage;
-
-      console.log(`${this.name} нанёс ${damage} урона ${enemy.name}`);
-      console.log(`У ${enemy.name} осталось ${enemy.healthPoints} единиц здоровья`);
-    } else {
       console.log(`${this.name} погиб и не может совершать действия!`);
+
+      return;
     }
+
+    const damage = getRandomIntInRange(this.minAttackDamage, this.maxAttackDamage);
+
+    let enemy;
+
+    if ((actionOfTarget === 'attack') || (actionOfTarget === 'healEnemy')) {
+      enemy = target;
+    } else {
+      const aviableToAttackEntries = arena
+        .filter((entry) => (entry !== this) && (entry !== target));
+      const randomEnemyIndex = getRandomIntInRange(0, aviableToAttackEntries.length - 1);
+
+      enemy = arena[randomEnemyIndex];
+    }
+
+    enemy.healthPoints -= damage;
+
+    console.log(`${this.name} нанёс ${damage} урона ${enemy.name}`);
+    console.log(`У ${enemy.name} осталось ${enemy.healthPoints} единиц здоровья`);
   };
 
   arena.push(this);
