@@ -11,7 +11,9 @@ function Warrior(name, arena) {
 
   this.attack = function attack(enemyName) {
     if (this.healthPoints <= 0) {
-      console.log(`${this.name} погиб и не может совершать действия!`);
+      const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
+
+      console.log(healthErrorMessage);
 
       return;
     }
@@ -22,8 +24,11 @@ function Warrior(name, arena) {
     if (enemy !== undefined) {
       enemy.healthPoints -= damage;
 
-      console.log(`${this.name} нанёс ${damage} урона ${enemyName}`);
-      console.log(`У ${enemyName} осталось ${enemy.healthPoints} единиц здоровья`);
+      const amountOfDamageMessage = `${this.name} нанёс ${damage} урона ${enemyName}`;
+      const remainingHealthMessage = `У ${enemyName} осталось ${enemy.healthPoints} единиц здоровья`;
+
+      console.log(amountOfDamageMessage);
+      console.log(remainingHealthMessage);
 
       if (enemy instanceof Monster) {
         this.isAttackMonster = true;
@@ -31,7 +36,9 @@ function Warrior(name, arena) {
         enemy.attack(this, 'attack');
       }
     } else {
-      console.log('Такой цели не найдено!');
+      const searchingErrorMessage = 'Такой цели не найдено!';
+
+      console.log(searchingErrorMessage);
     }
   };
 
@@ -46,7 +53,9 @@ function Healer(name, arena) {
 
   this.heal = function heal(targetName) {
     if (this.healthPoints <= 0) {
-      console.log(`${this.name} погиб и не может совершать действия!`);
+      const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
+
+      console.log(healthErrorMessage);
 
       return;
     }
@@ -57,8 +66,11 @@ function Healer(name, arena) {
     if (target !== undefined) {
       target.healthPoints += healingPower;
 
-      console.log(`${this.name} вылечил на ${healingPower} единиц здоровья ${targetName}`);
-      console.log(`У ${targetName} стало ${target.healthPoints} единиц здоровья`);
+      const amountOfHealthMessage = `${this.name} вылечил на ${healingPower} единиц здоровья ${targetName}`;
+      const remainingHealthMessage = `У ${targetName} стало ${target.healthPoints} единиц здоровья`;
+
+      console.log(amountOfHealthMessage);
+      console.log(remainingHealthMessage);
 
       if (target instanceof Monster) {
         target.attack(this, 'heal');
@@ -71,11 +83,15 @@ function Healer(name, arena) {
         if (monster !== undefined) {
           monster.attack(this, 'healEnemy');
         } else {
-          console.log('Живых монстров не осталось');
+          const searchingMonstersErrorMessage = 'Живых монстров не осталось';
+
+          console.log(searchingMonstersErrorMessage);
         }
       }
     } else {
-      console.log('Такой цели не найдено!');
+      const searchingErrorMessage = 'Такой цели не найдено!';
+
+      console.log(searchingErrorMessage);
     }
   };
 
@@ -90,7 +106,9 @@ function Monster(name, arena) {
 
   this.attack = function attack(target, actionOfTarget) {
     if (this.healthPoints > 0) {
-      console.log(`${this.name} погиб и не может совершать действия!`);
+      const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
+
+      console.log(healthErrorMessage);
 
       return;
     }
@@ -111,8 +129,11 @@ function Monster(name, arena) {
 
     enemy.healthPoints -= damage;
 
-    console.log(`${this.name} нанёс ${damage} урона ${enemy.name}`);
-    console.log(`У ${enemy.name} осталось ${enemy.healthPoints} единиц здоровья`);
+    const amountOfDamageMessage = `${this.name} нанёс ${damage} урона ${enemy.name}`;
+    const remainingHealthMessage = `У ${enemy.name} осталось ${enemy.healthPoints} единиц здоровья`;
+
+    console.log(amountOfDamageMessage);
+    console.log(remainingHealthMessage);
   };
 
   arena.push(this);
