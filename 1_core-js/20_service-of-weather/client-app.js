@@ -3,28 +3,15 @@ class ClientApp {
     this.server = server;
   }
 
-  getAvgTemperature(city, dayYear) {
-    return new Promise((resolve, reject) => {
-      const randomDelay = Math.random() * 1500 + 500;
+  getAverageTemperature(city, dayYear) {
+    if (!(this.server instanceof WeatherServer)) {
+      const message = 'Отсутствует подключение к серверу!';
+      const error = new Error(message);
 
-      setTimeout(() => {
-        let response;
+      return Promise.reject(error);
+    }
 
-        if (!(this.server instanceof WeatherServer)) {
-          response = new Error('Отсутствует подключение к серверу!');
-        } if (randomDelay > 1500) {
-          response = new Error('Ответ сервера превысил 1,5 секунды!');
-        } else {
-          response = this.server.getAvgTemperatureOfCity(city, dayYear);
-        }
-
-        if (response instanceof Error) {
-          reject(response);
-        }
-
-        resolve(response);
-      }, randomDelay);
-    });
+    return this.server.getAverageTemperatureOfCity(city, dayYear);
   }
 
   getDayAndMonth(day) {
@@ -38,22 +25,26 @@ class ClientApp {
   }
 
   showCities() {
-    const randomDelay = Math.random() * 1000 + 500;
-    const loadingCities = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.server.getCities());
-      }, randomDelay);
-    });
+    const loadingCities = this.server.getCities();
 
     loadingCities.then((receivedCities) => (console.log(receivedCities)));
   }
 
   showTemperatureOfCity(city, dayOfYear) {
-    const gettingAvgTemperature = this.getAvgTemperature(city, dayOfYear);
+    const gettingAverageTemperature = this.getAverageTemperature(city, dayOfYear);
+    const { day, month } = this.getDayAndMonth(dayOfYear);
+    const startTime = performance.now();
 
-    gettingAvgTemperature.then((avgTemperature) => {
-      const { day, month } = this.getDayAndMonth(dayOfYear);
-      const message = `Город ${city}, ${day} ${month}, средняя температура: ${avgTemperature}`;
+    gettingAverageTemperature.then((averageTemperature) => {
+      const endTime = performance.now();
+
+      if (endTime - startTime > 1500) {
+        const message = 'Превышено время ожидания';
+
+        throw new Error(message);
+      }
+
+      const message = `Город ${city}, ${day} ${month}, средняя температура: ${averageTemperature}`;
 
       console.log(message);
     }).catch((error) => {

@@ -65,10 +65,11 @@ class WeatherServer {
   }
 
   getCities() {
-    return this.cities.map(({ city }) => city);
+    const cities = this.cities.map(({ city }) => city);
+    return this.sendData(cities);
   }
 
-  getAvgTemperatureOfCity(userCity, dayYear) {
+  getAverageTemperatureOfCity(userCity, dayYear) {
     try {
       const infoCity = this.cities.find(({ city }) => city === userCity);
 
@@ -76,15 +77,27 @@ class WeatherServer {
         throw new Error('Данного города нет в базе данных!');
       }
 
-      const latitude = infoCity[2];
+      const { latitude } = infoCity;
 
       if ((dayYear < 1) || (dayYear > 365)) {
         throw new Error('Некорректный день года!');
       }
 
-      return (30 + latitude * ((182 - (202 - dayYear)) / 210 - 1)).toFixed(2);
+      const result = (30 + latitude * ((182 - (202 - dayYear)) / 210 - 1)).toFixed(2);
+
+      return this.sendData(result, false);
     } catch (error) {
-      return error;
+      return this.sendData(error, true);
     }
+  }
+
+  sendData(data, isReject) {
+    return new Promise((resolve, reject) => {
+      const randomDelay = Math.random() * 1500 + 500;
+ 
+      setTimeout(() => {
+        isReject ? reject(data) : resolve(data);
+      }, randomDelay);
+    });
   }
 }
