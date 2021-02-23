@@ -4,7 +4,7 @@ class ClientApp {
   }
 
   getAverageTemperature(city, dayYear) {
-    if (!(this.server instanceof WeatherServer)) {
+    if (!this.server) {
       const message = 'Отсутствует подключение к серверу!';
       const error = new Error(message);
 
