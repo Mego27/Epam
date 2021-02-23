@@ -5,23 +5,29 @@ function Device(power) {
 
 Device.prototype = {
   on() {
-    if (!this.state) {
-      this.state = true;
-
-      console.log('Set On');
+    if (this.state) {
+      return;
     }
+
+    this.state = true;
+
+    console.log('Set On');
   },
   off() {
-    if (this.state) {
-      this.state = false;
-
-      console.log('Set Off');
+    if (!this.state) {
+      return;
     }
+
+    this.state = false;
+
+    console.log('Set Off');
   },
   showInfo() {
-    if (this.state) {
-      console.log(`Power - ${this.power}`);
+    if (!this.state) {
+      return;
     }
+
+    console.log(`Power - ${this.power}`);
   },
 };
 
@@ -31,27 +37,28 @@ function VacuumCleaner() {
 }
 
 VacuumCleaner.prototype = Object.create(Device.prototype);
+VacuumCleaner.prototype.constructor = VacuumCleaner;
 VacuumCleaner.prototype.changeMode = function changeMode() {
-  if (this.state) {
-    if (this.mode === 'dry') {
-      this.mode = 'wet';
-    } else {
-      this.mode = 'dry';
-    }
-
-    console.log(`Changed to ${this.mode}`);
+  if (!this.state) {
+    return;
   }
+
+  if (this.mode === 'dry') {
+    this.mode = 'wet';
+  } else {
+    this.mode = 'dry';
+  }
+
+  console.log(`Changed to ${this.mode}`);
 };
 VacuumCleaner.prototype.showInfo = function showInfo() {
-  if (this.state) {
-    if (this.mode === 'dry') {
-      this.mode = 'wet';
-    } else {
-      this.mode = 'dry';
-    }
-
-    console.log(`Changed to ${this.mode}`);
+  if (!this.state) {
+    return;
   }
+
+  const message = `Power - ${this.power}\nCurrent mode - ${this.mode}`;
+
+  console.log(message);
 };
 
 function Robot() {
@@ -60,20 +67,24 @@ function Robot() {
 }
 
 Robot.prototype = Object.create(Device.prototype);
+Robot.prototype.constructor = Robot;
 Robot.prototype.scanMap = function scanMap() {
-  if (this.state) {
-    this.map = 'some location';
-
-    console.log('Scan map...');
+  if (!this.state) {
+    return;
   }
+  this.map = 'some location';
+
+  console.log('Scan map...');
 };
 Robot.prototype.showInfo = function showInfo() {
-  if (this.state) {
-    const mapInfo = this.map ? 'installed' : 'not installed';
-    const message = `Power - ${this.power}\nMap - ${mapInfo}\nCurrent mode - ${this.mode}`;
-
-    console.log(message);
+  if (!this.state) {
+    return;
   }
+
+  const mapInfo = this.map ? 'installed' : 'not installed';
+  const message = `Power - ${this.power}\nMap - ${mapInfo}\nCurrent mode - ${this.mode}`;
+
+  console.log(message);
 };
 
 function RobotCleaner() {
@@ -82,20 +93,25 @@ function RobotCleaner() {
 }
 
 RobotCleaner.prototype = Object.create(VacuumCleaner.prototype);
+RobotCleaner.prototype.constructor = RobotCleaner;
 RobotCleaner.prototype.scanMap = function scanMap() {
-  if (this.state) {
-    this.map = 'some location';
-
-    console.log('Scan map...');
+  if (!this.state) {
+    return;
   }
+
+  this.map = 'some location';
+
+  console.log('Scan map...');
 };
 RobotCleaner.prototype.showInfo = function showInfo() {
-  if (this.state) {
-    const mapInfo = this.map ? 'installed' : 'not installed';
-    const message = `Power - ${this.power}\nMap - ${mapInfo}\nCurrent mode - ${this.mode}`;
-
-    console.log(message);
+  if (!this.state) {
+    return;
   }
+
+  const mapInfo = this.map ? 'installed' : 'not installed';
+  const message = `Power - ${this.power}\nMap - ${mapInfo}\nCurrent mode - ${this.mode}`;
+
+  console.log(message);
 };
 
 function RobotSoldier() {
@@ -104,19 +120,24 @@ function RobotSoldier() {
 }
 
 RobotSoldier.prototype = Object.create(Robot.prototype);
+RobotSoldier.prototype.constructor = RobotSoldier;
 RobotSoldier.prototype.fireOn = function fireOn() {
-  if (this.state) {
-    this.mode = 'fire';
-
-    console.log('Robot fire');
+  if (!this.state) {
+    return;
   }
+
+  this.mode = 'fire';
+
+  console.log('Robot fire');
 };
 RobotSoldier.prototype.fireOff = function fireOff() {
-  if (this.state) {
-    this.mode = 'not fire';
-
-    console.log('Robot not fire');
+  if (!this.state) {
+    return;
   }
+
+  this.mode = 'not fire';
+
+  console.log('Robot not fire');
 };
 
 const vacuumCleaner = new VacuumCleaner(10);
