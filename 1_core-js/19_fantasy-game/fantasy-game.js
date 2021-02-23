@@ -2,6 +2,29 @@ function getRandomIntInRange(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function printActionMessage(character, target, type, power) {
+  if (type === 'attack') {
+    const amountOfDamageMessage = `${character} нанёс ${power} урона ${target.name}`;
+    const remainingHealthMessage = `У ${target.name} осталось ${target.healthPoints} единиц здоровья`;
+
+    console.log(amountOfDamageMessage);
+    console.log(remainingHealthMessage);
+  } else {
+    const amountOfHealthMessage = `${character} вылечил на ${power} единиц здоровья ${target.name}`;
+    const remainingHealthMessage = `У ${target.name} стало ${target.healthPoints} единиц здоровья`;
+
+    console.log(amountOfHealthMessage);
+    console.log(remainingHealthMessage);
+  }
+}
+
+function printHealthErrorMessage(name) {
+  const healthErrorMessage = `${name} погиб и не может совершать действия!`;
+
+  console.log(healthErrorMessage);
+}
+
+const searchingErrorMessage = 'Такой цели не найдено!';
 const arena = [];
 
 class Entity {
@@ -23,9 +46,7 @@ class Warrior extends Entity {
 
   attack(enemyName) {
     if (this.healthPoints <= 0) {
-      const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
-
-      console.log(healthErrorMessage);
+      printHealthErrorMessage(this.name);
 
       return;
     }
@@ -33,8 +54,6 @@ class Warrior extends Entity {
     const enemy = arena.find((entry) => entry.name === enemyName);
 
     if (enemy === undefined) {
-      const searchingErrorMessage = 'Такой цели не найдено!';
-
       console.log(searchingErrorMessage);
 
       return;
@@ -44,11 +63,7 @@ class Warrior extends Entity {
 
     enemy.healthPoints -= damage;
 
-    const amountOfDamageMessage = `${this.name} нанёс ${damage} урона ${enemyName}`;
-    const remainingHealthMessage = `У ${enemyName} осталось ${enemy.healthPoints} единиц здоровья`;
-
-    console.log(amountOfDamageMessage);
-    console.log(remainingHealthMessage);
+    printActionMessage(this.name, enemy, 'attack', damage);
 
     if (enemy.type === 'monster') {
       this.isAttackMonster = true;
@@ -66,9 +81,7 @@ class Healer extends Entity {
 
   heal(targetName) {
     if (this.healthPoints <= 0) {
-      const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
-
-      console.log(healthErrorMessage);
+      printHealthErrorMessage(this.name);
 
       return;
     }
@@ -76,8 +89,6 @@ class Healer extends Entity {
     const target = arena.find((entry) => entry.name === targetName);
 
     if (target === undefined) {
-      const searchingErrorMessage = 'Такой цели не найдено!';
-
       console.log(searchingErrorMessage);
 
       return;
@@ -87,11 +98,7 @@ class Healer extends Entity {
 
     target.healthPoints += healingPower;
 
-    const amountOfHealthMessage = `${this.name} вылечил на ${healingPower} единиц здоровья ${targetName}`;
-    const remainingHealthMessage = `У ${targetName} стало ${target.healthPoints} единиц здоровья`;
-
-    console.log(amountOfHealthMessage);
-    console.log(remainingHealthMessage);
+    printActionMessage(this.name, target, 'heal', healingPower);
 
     if (target.type === 'monster') {
       target.attack(this, 'heal');
@@ -120,9 +127,7 @@ class Monster extends Entity {
 
   attack(target, actionOfTarget) {
     if (this.healthPoints <= 0) {
-      const healthErrorMessage = `${this.name} погиб и не может совершать действия!`;
-
-      console.log(healthErrorMessage);
+      printHealthErrorMessage(this.name);
 
       return;
     }
@@ -143,11 +148,7 @@ class Monster extends Entity {
 
     enemy.healthPoints -= damage;
 
-    const amountOfDamageMessage = `${this.name} нанёс ${damage} урона ${enemy.name}`;
-    const remainingHealthMessage = `У ${enemy.name} осталось ${enemy.healthPoints} единиц здоровья`;
-
-    console.log(amountOfDamageMessage);
-    console.log(remainingHealthMessage);
+    printActionMessage(this.name, enemy, 'attack', damage);
   }
 }
 
