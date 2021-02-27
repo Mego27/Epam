@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'Roboto-Regular'; 
+	src: url('../fonts/Roboto-Regular.ttf'); 
+}
+@font-face {
+    font-family: 'arial'; 
+	src: url('../fonts/arial.ttf'); 
+}
+
+.header {
+    background-color: white;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+}
+.header__container {
+    width: 100%;
+    max-width: 1170px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+
+    &__menu {
+        list-style: none;
+        font-family: 'arial';
+        font-size: 1.5rem;
+        color: #c83737;
+    }
+    &__menu-item {
+        display: inline-block;
+        margin: 0 10px;
+    }
+    &__menu-item:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+.info {
+    display: flex;
+    align-items: center;
+
+    &__phone {
+        margin-right: 25px;
+        font-size: 1.5rem;
+    }
+    &__city {
+        display: flex;
+        font-size: 1.2rem;
+        align-items: center;
+    }
+    &__city-arrow {
+        margin-left: 10px;
+    }
+    &__city-arrow::after {
+        content: '';
+        position: relative;
+        bottom: -10px;
+        border: 4px solid transparent;
+        border-top: 4px solid rgb(0, 0, 0);
+    }
+}
