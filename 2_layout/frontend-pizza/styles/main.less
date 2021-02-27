@@ -43,8 +43,8 @@
         max-width: 1170px;
         margin: 0 auto;
     }
-    &__menu {
-        margin: 30px 0 22px;
+    &__slider-container {
+        margin-bottom: 30px;
     }
     &__menu-title {
         color: white;
@@ -513,3 +513,19 @@
     }
 }
 
+@media screen and (max-width: 1200px) {
+    .basket-column {
+        display: none;
+    }
+    .main {
+        &__container {
+            margin: 0 15px;
+        }
+        &__content {
+            flex-basis: 100%;
+        }
+    }
+    .products__container {
+        justify-content: space-between;
+    }
+}
