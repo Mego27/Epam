@@ -455,6 +455,7 @@
     flex-basis: 25%;
 }
 .basket {
+    max-width: 285px;
     background-image: url("../images/basket.png");
     background-repeat: no-repeat;
     background-position: center;
@@ -462,6 +463,7 @@
     height: 300px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     position: sticky;
     top: 15px;
 
@@ -478,9 +480,10 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        width: 181px;
     }
     &__item {
-        width: 63%;
+        // width: 63%;
         min-height: 38px;
         display: flex;
         align-items: center;
