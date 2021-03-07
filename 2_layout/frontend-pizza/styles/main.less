@@ -91,7 +91,12 @@
 
     &__container-content {
         height: 580px;
+        overflow: hidden;
         position: relative;
+    }
+    &__container-content img {
+        width: 100%;
+        height: 100%;
     }
     &__content {
         position: absolute;
@@ -412,6 +417,8 @@
 }
 
 .promotions {
+    width: 100%;
+
     &__title {
         color: white;
         font-family: 'Arial-Italic';
@@ -421,9 +428,9 @@
     &__container {
         margin-top: -10px;
         display: grid;
-        grid-template-columns: repeat(3, 285px);
-        grid-template-rows: repeat(3, 205px);
-        grid-gap: 10px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-gap: 5px 10px;
         box-sizing: border-box;
     }
     &__item {
