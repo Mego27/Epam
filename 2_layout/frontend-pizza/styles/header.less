@@ -18,12 +18,14 @@
     max-width: 1170px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
 }
 
 .logo {
     display: flex;
     align-items: center;
+    max-width: 285px;
+    margin-left: 0;
+    margin-right: auto;
 }
 
 .nav {
@@ -32,13 +34,17 @@
 
     &__menu {
         list-style: none;
-        font-family: 'arial';
-        font-size: 1.5rem;
+        font-family: 'Roboto-Regular';
+        font-size: 2.1rem;
         color: #c83737;
     }
     &__menu-item {
         display: inline-block;
-        margin: 0 10px;
+        margin-left: 15px;
+
+        &:first-child {
+            margin-left: 0;
+        }
     }
     &__menu-item:hover {
         text-decoration: underline;
@@ -49,18 +55,23 @@
 .info {
     display: flex;
     align-items: center;
+    max-width: 285px;
+    margin-right: 0;
+    margin-left: auto;
 
     &__phone {
-        margin-right: 25px;
-        font-size: 1.5rem;
+        margin-right: 30px;
+        font-size: 2.1rem;
+        font-family: 'Roboto-Regular';
     }
     &__city {
         display: flex;
-        font-size: 1.2rem;
+        font-size: 1.7rem;
+        font-family: 'Roboto-Regular';
         align-items: center;
     }
     &__city-arrow {
-        margin-left: 10px;
+        margin-left: 7px;
     }
     &__city-arrow::after {
         content: '';
