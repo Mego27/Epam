@@ -55,11 +55,10 @@
         cursor: pointer;
     }
     &__mobile-menu {
-        display: none;
-        padding: 7px 7px 5px;
+        padding: 11px 7px 7px;
         border: 2px solid black;
         border-radius: 5px;
-        display: flex;
+        display: none;
         justify-content: center;
         align-items: center;
 
@@ -103,23 +102,82 @@
     }
 }
 
+.basket-mobile {
+    width: 100%;
+    display: none;
+    justify-content: flex-end;
+    align-items: center;
+
+    &__counter-container {
+        position: relative;
+    }
+    &__counter {
+        @color-counter: #8C2626;
+
+        position: absolute;
+        width: 62%;
+        font-size: 1.3rem;
+        font-family: 'Roboto-Bold';
+        color: white;
+        background-color: #c83737;
+        top: 4px;
+        right: 3px;
+        display: block;
+        text-align: center;
+        text-shadow: 
+            -0 -1px 1px @color-counter,
+            0 -1px 1px @color-counter,
+            -0 1px 1px @color-counter,
+            0 1px 1px @color-counter,
+            -1px -0 1px @color-counter,
+            1px -0 1px @color-counter,
+            -1px 0 1px @color-counter,
+            1px 0 1px @color-counter,
+            -1px -1px 1px @color-counter,
+            1px -1px 1px @color-counter,
+            -1px 1px 1px @color-counter,
+            1px 1px 1px @color-counter,
+            -1px -1px 1px @color-counter,
+            1px -1px 1px @color-counter,
+            -1px 1px 1px @color-counter,
+            1px 1px 1px @color-counter;
+    }
+    &__info {
+        padding-left: 3px;
+        padding-right: 20px;
+        text-align: center;
+        font-size: 1.3rem;
+        font-family: 'Roboto-Regular';
+        color: #e5e5e5;
+    }
+}
+
 @media screen and (max-width: 1200px) {
+    .header {
+        height: 60px;
+    }
     .header__container {
-        max-width: 905px;
+        max-width: 875px;
     }
     .logo {
         max-width: 210px;
+    }
+    .logo img {
+        src: url('../images/header-logo-tablet.png');
     }
     .nav {
         order: 1;
         margin-left: 20px;
 
         &__mobile-menu {
-            display: block;
+            display: flex;
         }
         &__menu {
             display: none;
         }
+    }
+    .basket-mobile {
+        display: flex;
     }
     .info__phone {
         display: none;
