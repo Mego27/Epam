@@ -26,6 +26,10 @@
     max-width: 285px;
     margin-left: 0;
     margin-right: auto;
+
+    img {
+        width: 100%;
+    }
 }
 
 .nav {
@@ -50,6 +54,19 @@
         text-decoration: underline;
         cursor: pointer;
     }
+    &__mobile-menu {
+        display: none;
+        padding: 7px 7px 5px;
+        border: 2px solid black;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 
 .info {
@@ -69,6 +86,10 @@
         font-size: 1.7rem;
         font-family: 'Roboto-Regular';
         align-items: center;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
     &__city-arrow {
         margin-left: 7px;
@@ -76,8 +97,31 @@
     &__city-arrow::after {
         content: '';
         position: relative;
-        bottom: -10px;
+        bottom: -13px;
         border: 4px solid transparent;
         border-top: 4px solid rgb(0, 0, 0);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .header__container {
+        max-width: 905px;
+    }
+    .logo {
+        max-width: 210px;
+    }
+    .nav {
+        order: 1;
+        margin-left: 20px;
+
+        &__mobile-menu {
+            display: block;
+        }
+        &__menu {
+            display: none;
+        }
+    }
+    .info__phone {
+        display: none;
     }
 }
