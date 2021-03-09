@@ -91,7 +91,6 @@
 
     &__container-content {
         height: 580px;
-        overflow: hidden;
         position: relative;
     }
     &__container-content img {
@@ -159,11 +158,10 @@
         justify-content: center;
         align-items: center;
         top: 50%;
-        width: 70px;
+        min-width: 70px;
         height: 70px;
         margin-top: -35px;
         background-color: rgba(214, 214, 214, .8);
-        overflow-x: hidden;
         border: none;
         outline: none;
         transition: all .1s ease-in;
@@ -176,11 +174,36 @@
         width: 15px;
         height: 30px;
     }
+
+    @width-triangle: 15px;
+
     &__arrow--direction-left {
-        left: 0px;
+        left: -@width-triangle;
+        overflow: visible;
+
+        svg {
+            margin: 0 15+@width-triangle 0 10px;
+        }
+    }
+    &__arrow--direction-left::before {
+        content: '';
+        border-top: @width-triangle solid #696969;
+        border-left: @width-triangle solid transparent;
+        margin-top: 70px + @width-triangle;
     }
     &__arrow--direction-right {
-        right: 0px;
+        right: -@width-triangle;
+        overflow: visible;
+
+        svg {
+            padding: 0 10px 0 15+@width-triangle;
+        }
+    }
+    &__arrow--direction-right::after {
+        content: '';
+        border-top: @width-triangle solid #696969;
+        border-right: @width-triangle solid transparent;
+        margin-top: 70px + @width-triangle;
     }
 
     &__points {
@@ -559,7 +582,7 @@
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1230px) {
     .basket-column {
         display: none;
     }
@@ -605,7 +628,7 @@
     }
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 930px) {
     .main {
         &__container {
             max-width: 100%;
