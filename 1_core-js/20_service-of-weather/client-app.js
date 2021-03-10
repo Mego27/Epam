@@ -33,10 +33,10 @@ class ClientApp {
   showTemperatureOfCity(city, dayOfYear) {
     const gettingAverageTemperature = this.getAverageTemperature(city, dayOfYear);
     const { day, month } = this.getDayAndMonth(dayOfYear);
-    const startTime = performance.now();
+    const startTime = Date.now();
 
     gettingAverageTemperature.then((averageTemperature) => {
-      const endTime = performance.now();
+      const endTime = Date.now();
 
       if (endTime - startTime > 1500) {
         const message = 'Превышено время ожидания';
