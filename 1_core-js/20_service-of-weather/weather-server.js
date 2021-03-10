@@ -87,7 +87,7 @@ class WeatherServer {
 
       return this.sendData(result, false);
     } catch (error) {
-      return this.sendData(error, true);
+      return this.sendData(error.message, true);
     }
   }
 
@@ -96,7 +96,9 @@ class WeatherServer {
       const randomDelay = Math.random() * 1500 + 500;
  
       setTimeout(() => {
-        isReject ? reject(data) : resolve(data);
+        const jsonData = JSON.stringify(data);
+
+        isReject ? reject(jsonData) : resolve(jsonData);
       }, randomDelay);
     });
   }

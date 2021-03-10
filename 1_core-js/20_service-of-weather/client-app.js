@@ -27,7 +27,7 @@ class ClientApp {
   showCities() {
     const loadingCities = this.server.getCities();
 
-    loadingCities.then((receivedCities) => (console.log(receivedCities)));
+    loadingCities.then((receivedCitiesJSON) => (console.log((receivedCitiesJSON))));
   }
 
   showTemperatureOfCity(city, dayOfYear) {
@@ -35,7 +35,7 @@ class ClientApp {
     const { day, month } = this.getDayAndMonth(dayOfYear);
     const startTime = Date.now();
 
-    gettingAverageTemperature.then((averageTemperature) => {
+    gettingAverageTemperature.then((averageTemperatureJSON) => {
       const endTime = Date.now();
 
       if (endTime - startTime > 1500) {
@@ -44,11 +44,14 @@ class ClientApp {
         throw new Error(message);
       }
 
+      const averageTemperature = JSON.parse(averageTemperatureJSON);
       const message = `Город ${city}, ${day} ${month}, средняя температура: ${averageTemperature}`;
 
       console.log(message);
-    }).catch((error) => {
-      console.log(error.message);
+    }).catch((errorJSON) => {
+      const error = JSON.parse(errorJSON);
+
+      console.log(error);
     });
   }
 }
