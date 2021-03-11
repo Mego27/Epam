@@ -71,35 +71,49 @@ class WeatherServer {
 
   getAverageTemperatureOfCity(userCity, dayYear) {
     try {
+      const result = {
+        error: null,
+      };
       const infoCity = this.cities.find(({ city }) => city === userCity);
+      let latitude;
 
       if (infoCity === undefined) {
-        throw new Error('Данного города нет в базе данных!');
+        const error = new Error('400: Данного города нет в базе данных!');
+        result.error = error.message;
+      } else {
+        latitude = infoCity.latitude;
       }
-
-      const { latitude } = infoCity;
 
       if ((dayYear < 1) || (dayYear > 365)) {
-        throw new Error('Некорректный день года!');
+        const error = new Error('400: Некорректный день года!');
+        result.error = error.message;
       }
 
-      const result = (30 + latitude * ((182 - (202 - dayYear)) / 210 - 1)).toFixed(2);
+      result.value = (30 + latitude * ((182 - (202 - dayYear)) / 210 - 1)).toFixed(2);
 
       return this.sendData(result, false);
     } catch (error) {
-      return this.sendData(error.message, true);
+      const errorMessage = `500: ${error.message}`;
+      return this.sendData(errorMessage, true);
     }
   }
 
-  sendData(data, isReject) {
+  sendData(data, isInternalServerError) {
     return new Promise((resolve, reject) => {
       const randomDelay = Math.random() * 1500 + 500;
  
       setTimeout(() => {
         const jsonData = JSON.stringify(data);
 
-        isReject ? reject(jsonData) : resolve(jsonData);
+        isInternalServerError ? reject(jsonData) : resolve(jsonData);
       }, randomDelay);
     });
+  }
+
+  getAPI() {
+    return {
+      getCities: this.getCities.bind(this),
+      getAverageTemperatureOfCity: this.getAverageTemperatureOfCity.bind(this),
+    };
   }
 }

@@ -1,17 +1,17 @@
 class ClientApp {
-  constructor(server) {
-    this.server = server;
+  constructor(serverAPI) {
+    this.serverAPI = serverAPI;
   }
 
   getAverageTemperature(city, dayYear) {
-    if (!this.server) {
-      const message = 'Отсутствует подключение к серверу!';
+    if (!this.serverAPI) {
+      const message = '520: Отсутствует подключение к серверу!';
       const error = new Error(message);
 
       return Promise.reject(error);
     }
 
-    return this.server.getAverageTemperatureOfCity(city, dayYear);
+    return this.serverAPI.getAverageTemperatureOfCity(city, dayYear);
   }
 
   getDayAndMonth(day) {
@@ -25,7 +25,7 @@ class ClientApp {
   }
 
   showCities() {
-    const loadingCities = this.server.getCities();
+    const loadingCities = this.serverAPI.getCities();
 
     loadingCities.then((receivedCitiesJSON) => (console.log((receivedCitiesJSON))));
   }
@@ -35,16 +35,26 @@ class ClientApp {
     const { day, month } = this.getDayAndMonth(dayOfYear);
     const startTime = Date.now();
 
-    gettingAverageTemperature.then((averageTemperatureJSON) => {
+    gettingAverageTemperature.then((responseJSON) => {
       const endTime = Date.now();
 
       if (endTime - startTime > 1500) {
-        const message = 'Превышено время ожидания';
+        const message = '408: Превышено время ожидания';
+        const error = new Error(message);
 
-        throw new Error(message);
+        console.log(error.message);
+        return;
       }
 
-      const averageTemperature = JSON.parse(averageTemperatureJSON);
+      const response = JSON.parse(responseJSON);
+
+      if (response.error !== null) {
+        console.log(response.error);
+
+        return;
+      }
+
+      const { value: averageTemperature } = response;
       const message = `Город ${city}, ${day} ${month}, средняя температура: ${averageTemperature}`;
 
       console.log(message);
