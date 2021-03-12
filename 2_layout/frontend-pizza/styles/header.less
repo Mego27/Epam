@@ -10,19 +10,29 @@
 .header {
     background-color: white;
     height: 80px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 .header__container {
     margin: 0 15px;
     max-width: 1170px;
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
 .logo {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     max-width: 285px;
     margin-left: 0;
     margin-right: auto;
@@ -33,8 +43,12 @@
 }
 
 .nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 
     &__menu {
         list-style: none;
@@ -59,8 +73,12 @@
         border: 2px solid black;
         border-radius: 5px;
         display: none;
-        justify-content: center;
-        align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
 
         &:hover {
             cursor: pointer;
@@ -69,8 +87,12 @@
 }
 
 .info {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     max-width: 285px;
     margin-right: 0;
     margin-left: auto;
@@ -81,10 +103,14 @@
         font-family: 'Roboto-Regular';
     }
     &__city {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
         font-size: 1.7rem;
         font-family: 'Roboto-Regular';
-        align-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
 
         &:hover {
             cursor: pointer;
@@ -105,8 +131,12 @@
 .basket-mobile {
     width: 100%;
     display: none;
-    justify-content: flex-end;
-    align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 
     &__counter-container {
         position: relative;
@@ -166,10 +196,14 @@
         src: url('../images/header-logo-tablet.png');
     }
     .nav {
-        order: 1;
+        -webkit-box-ordinal-group: 2;
+            -ms-flex-order: 1;
+                order: 1;
         margin-left: 20px;
 
         &__mobile-menu {
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
         }
         &__menu {
@@ -177,6 +211,8 @@
         }
     }
     .basket-mobile {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
     }
     .info__phone {
