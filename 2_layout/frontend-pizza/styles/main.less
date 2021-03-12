@@ -480,10 +480,14 @@
         }
     }
     &__item img {
-        width: 100%;
+        height: 100%;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
     }
     &__item-text {
         position: absolute;
+        z-index: 10;
         width: 100%;
         box-sizing: border-box;
         font-family: 'Arial-Italic';
@@ -707,9 +711,6 @@
                 grid-row: 3;
             }
         }
-        &__item img {
-            height: 100%;
-        }
     }
 }
 
@@ -742,9 +743,6 @@
         }
     }
     .promotions {
-        &__item img {
-            width: 200%;
-        }
         &__item-text {
             font-size: 2rem;
             padding: 15px 20px 10px;
