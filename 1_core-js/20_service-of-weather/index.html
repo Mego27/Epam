@@ -11,6 +11,15 @@
 
     <script src="./client-app.js"></script>
     <script src="./weather-server.js"></script>
+    <script>
+        const server = new WeatherServer();
+        const clientApp = new ClientApp(server);
+
+        clientApp.showTemperatureOfCity('Москва', 245);
+        clientApp.showTemperatureOfCity('Москв', 245);
+        clientApp.showTemperatureOfCity('Москва', 467);
+        clientApp.showCities();
+    </script>
 </body>
 
 </html>

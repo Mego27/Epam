@@ -1,4 +1,4 @@
-import ServerError from 'server-error.js';
+import ServerError from './server-error.js';
 
 class WeatherServer {
   constructor() {
@@ -81,20 +81,18 @@ class WeatherServer {
 
       if (city === undefined) {
         result.error = new ServerError(400, 'Данного города нет в базе данных!');
+      } else if ((dayYear < 1) || (dayYear > 365)) {
+        result.error = new ServerError(400, 'Некорректный день года!');
       } else {
         latitude = city.latitude;
+        result.value = (30 + latitude * ((182 - (202 - dayYear)) / 210 - 1)).toFixed(2);
       }
-
-      if ((dayYear < 1) || (dayYear > 365)) {
-        result.error = new ServerError(400, 'Некорректный день года!');
-      }
-
-      result.value = (30 + latitude * ((182 - (202 - dayYear)) / 210 - 1)).toFixed(2);
 
       return this.sendData(result, false);
     } catch (error) {
-      const errorMessage = `500: ${error.message}`;
-      return this.sendData(errorMessage, true);
+      const result = { error: new ServerError(500, error.message) };
+
+      return this.sendData(result, true);
     }
   }
 
