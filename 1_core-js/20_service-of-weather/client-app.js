@@ -30,7 +30,6 @@ class ClientApp {
 
   showTemperatureOfCity(city, dayOfYear) {
     const gettingAverageTemperature = this.requestAverageTemperature(city, dayOfYear);
-    const { day, month } = this.getDayAndMonth(dayOfYear);
     const startTime = Date.now();
 
     gettingAverageTemperature.then((responseJSON) => {
@@ -53,6 +52,7 @@ class ClientApp {
       }
 
       const { value: averageTemperature } = response;
+      const { day, month } = this.getDayAndMonth(dayOfYear);
       const message = `Город ${city}, ${day} ${month}, средняя температура: ${averageTemperature}`;
 
       console.log(message);
