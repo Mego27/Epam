@@ -5,7 +5,7 @@ class ClientApp {
     this.serverAPI = serverAPI;
   }
 
-  getAverageTemperature(city, dayYear) {
+  requestAverageTemperature(city, dayYear) {
     if (!this.serverAPI) {
       return Promise.reject(new ServerError(520, 'Отсутствует подключение к серверу!'));
     }
@@ -29,7 +29,7 @@ class ClientApp {
   }
 
   showTemperatureOfCity(city, dayOfYear) {
-    const gettingAverageTemperature = this.getAverageTemperature(city, dayOfYear);
+    const gettingAverageTemperature = this.requestAverageTemperature(city, dayOfYear);
     const { day, month } = this.getDayAndMonth(dayOfYear);
     const startTime = Date.now();
 
