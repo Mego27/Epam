@@ -1,3 +1,5 @@
+import ServerError from 'server-error.js';
+
 class ClientApp {
   constructor(serverAPI) {
     this.serverAPI = serverAPI;
@@ -5,10 +7,7 @@ class ClientApp {
 
   getAverageTemperature(city, dayYear) {
     if (!this.serverAPI) {
-      const message = '520: Отсутствует подключение к серверу!';
-      const error = new Error(message);
-
-      return Promise.reject(error);
+      return Promise.reject(new ServerError(520, 'Отсутствует подключение к серверу!'));
     }
 
     return this.serverAPI.getAverageTemperatureOfCity(city, dayYear);
@@ -25,9 +24,8 @@ class ClientApp {
   }
 
   showCities() {
-    const loadingCities = this.serverAPI.getCities();
-
-    loadingCities.then((citiesJSON) => (console.log((citiesJSON))));
+    this.serverAPI.getCities()
+      .then((citiesJSON) => (console.log((citiesJSON))));
   }
 
   showTemperatureOfCity(city, dayOfYear) {
