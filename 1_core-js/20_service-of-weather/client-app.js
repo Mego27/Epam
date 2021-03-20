@@ -27,7 +27,7 @@ class ClientApp {
   showCities() {
     const loadingCities = this.serverAPI.getCities();
 
-    loadingCities.then((receivedCitiesJSON) => (console.log((receivedCitiesJSON))));
+    loadingCities.then((citiesJSON) => (console.log((citiesJSON))));
   }
 
   showTemperatureOfCity(city, dayOfYear) {

@@ -1,3 +1,5 @@
+import ServerError from 'server-error.js';
+
 class WeatherServer {
   constructor() {
     this.cities = [
@@ -69,24 +71,22 @@ class WeatherServer {
     return this.sendData(cities);
   }
 
-  getAverageTemperatureOfCity(userCity, dayYear) {
+  getAverageTemperatureOfCity(cityName, dayYear) {
     try {
       const result = {
         error: null,
       };
-      const infoCity = this.cities.find(({ city }) => city === userCity);
+      const city = this.cities.find(({ city }) => city === cityName);
       let latitude;
 
-      if (infoCity === undefined) {
-        const error = new Error('400: Данного города нет в базе данных!');
-        result.error = error.message;
+      if (city === undefined) {
+        result.error = new ServerError(400, 'Данного города нет в базе данных!');
       } else {
-        latitude = infoCity.latitude;
+        latitude = city.latitude;
       }
 
       if ((dayYear < 1) || (dayYear > 365)) {
-        const error = new Error('400: Некорректный день года!');
-        result.error = error.message;
+        result.error = new ServerError(400, 'Некорректный день года!');
       }
 
       result.value = (30 + latitude * ((182 - (202 - dayYear)) / 210 - 1)).toFixed(2);
