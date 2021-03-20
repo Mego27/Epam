@@ -13,7 +13,7 @@ class ClientApp {
     return this.serverAPI.getAverageTemperatureOfCity(city, dayYear);
   }
 
-  getDayAndMonth(day) {
+  getWeekDayAndMonth(day) {
     const date = new Date(2021, 0, day);
     const month = date.toLocaleString('default', { month: 'long' });
 
