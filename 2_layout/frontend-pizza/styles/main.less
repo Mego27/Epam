@@ -1,13 +1,20 @@
-@color-red: #c83737;
-@color-gray: #bebebe;
-@color-gray_dark: #565656;
-@color-red_light: #ff3a3a;
-@color-yellow: #ffd906;
-@color-yellow_light: #ffe733;
+@colorRed: #c83737;
+@colorRedLight: #ff3a3a;
+@colorGrayLight: #bebebe;
+@colorGray: #565656;
+@colorGrayDark: #333;
+@colorMainBackground: #3b3b3b;
+@colorBlackOpacity: rgba(0, 0, 0, .8);
+@colorYellow: #ffd906;
+@colorSliderButtonFontHover: #111;
+@colorSliderButtonHover: #ffe733;
+@colorSliderArrow: rgba(214, 214, 214, .8);
+@colorSliderArrowHover: #fff;
+@colorSliderArrowTriangle: #696969;
 
 .main {
     background-image: url('../images/background-pattern.png');
-    background-color: #3b3b3b;
+    background-color: @colorMainBackground;
     background-repeat: repeat;
 
     &__container {
@@ -103,7 +110,7 @@
         min-width: max-content;
         height: 100%;
         padding: 0 60px 0 112px;
-        background-color: rgba(0, 0, 0, .8);
+        background-color: @colorBlackOpacity;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -145,9 +152,9 @@
         border: 0;
         border-radius: 5px;
         padding: 18px 40px;
-        background-color: @color-yellow;
+        background-color: @colorYellow;
         text-transform: uppercase;
-        color: #333;
+        color: @colorGrayDark;
         display: block;
         margin: 25px 0 0 auto;
         -webkit-transition: all .2s ease-in;
@@ -156,8 +163,8 @@
         line-height: .85;
     }
     &__button:hover {
-        background-color: @color-yellow_light;
-        color: #111;
+        background-color: @colorSliderButtonHover;
+        color: @colorSliderButtonFontHover;
         cursor: pointer;
     }
     &__arrow {
@@ -175,7 +182,7 @@
         min-width: 70px;
         height: 70px;
         margin-top: -35px;
-        background-color: rgba(214, 214, 214, .8);
+        background-color: @colorSliderArrow;
         border: none;
         outline: none;
         -webkit-transition: all .1s ease-in;
@@ -184,7 +191,7 @@
     }
     &__arrow:hover {
         cursor: pointer;
-        background-color: #fff;
+        background-color: @colorSliderArrowHover;
     }
     &__arrow-svg {
         width: 15px;
@@ -203,7 +210,7 @@
     }
     &__arrow--direction-left::before {
         content: '';
-        border-top: @width-triangle solid #696969;
+        border-top: @width-triangle solid @colorSliderArrowTriangle;
         border-left: @width-triangle solid transparent;
         margin-top: 70px + @width-triangle;
     }
@@ -217,7 +224,7 @@
     }
     &__arrow--direction-right::after {
         content: '';
-        border-top: @width-triangle solid #696969;
+        border-top: @width-triangle solid @colorSliderArrowTriangle;
         border-right: @width-triangle solid transparent;
         margin-top: 70px + @width-triangle;
     }
@@ -236,17 +243,17 @@
         border: none;
         width: 32.4%;
         outline: none;
-        background-color: @color-gray_dark;
+        background-color: @colorGray;
         -webkit-transition: all .3s ease;
         -o-transition: all .3s ease;
         transition: all .3s ease;
 
         &:hover {
             cursor: pointer;
-            background-color: @color-gray;
+            background-color: @colorGrayLight;
         }
         &:focus {
-            background-color: @color-yellow;
+            background-color: @colorYellow;
         }
     }
 }
@@ -263,9 +270,9 @@
         padding: 13px 14px;
         font-size: 1.7rem;
         background-color: transparent;
-        color: @color-gray;
+        color: @colorGrayLight;
         font-family: 'Roboto-Regular';
-        border: 1px solid @color-gray;
+        border: 1px solid @colorGrayLight;
         border-radius: 15px;
         line-height: .7;
         -webkit-transition: all .2s ease-in;
@@ -292,9 +299,9 @@
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     background-color: transparent;
-    color: @color-gray;
+    color: @colorGrayLight;
     font-family: 'Roboto-Regular';
-    border: 1px solid @color-gray;
+    border: 1px solid @colorGrayLight;
     border-radius: 15px;
     -webkit-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
@@ -325,28 +332,28 @@
     &__input::-webkit-input-placeholder {
         -webkit-transition: all .2s ease-in;
         transition: all .2s ease-in;
-        color: @color-gray;
+        color: @colorGrayLight;
     }
     &__input::-moz-placeholder {
         -moz-transition: all .2s ease-in;
         transition: all .2s ease-in;
-        color: @color-gray;
+        color: @colorGrayLight;
     }
     &__input:-ms-input-placeholder {
         -ms-transition: all .2s ease-in;
         transition: all .2s ease-in;
-        color: @color-gray;
+        color: @colorGrayLight;
     }
     &__input::-ms-input-placeholder {
         -ms-transition: all .2s ease-in;
         transition: all .2s ease-in;
-        color: @color-gray;
+        color: @colorGrayLight;
     }
     &__input::placeholder {
         -webkit-transition: all .2s ease-in;
         -o-transition: all .2s ease-in;
         transition: all .2s ease-in;
-        color: @color-gray;
+        color: @colorGrayLight;
     }
     &__btn {
         height: 100%;
@@ -361,7 +368,7 @@
                 justify-content: center;
         padding: 0 0 0 10px;
         border: none;
-        border-left: 1px solid @color-gray;
+        border-left: 1px solid @colorGrayLight;
         outline: none;
         background-color: transparent;
         cursor: pointer;
@@ -434,14 +441,14 @@
     }
     &__title {
         font-family: 'Arial-Bold-Italic';
-        color: #333;
+        color: @colorGrayDark;
         font-size: 2.4rem;
     }
     &__composition {
         margin-top: 10px;
         margin-left: 17px;
         font-family: 'Arial-Italic';
-        color: #333;
+        color: @colorGrayDark;
         font-size: 1.7rem;
     }
     &__composition-item {
@@ -476,8 +483,8 @@
             -ms-flex-align: center;
                 align-items: center;
         border-radius: 13px;
-        background-color: #565656;
-        border: 2px solid #565656;
+        background-color: @colorGray;
+        border: 2px solid @colorGray;
         margin-top: 28px;
         margin-bottom: 18px;
     }
@@ -510,8 +517,8 @@
         transition: all .3s ease-in;
     }
     &__sizes input[type='radio']:checked ~ .product__sizes-text {
-        background-color: #ffd906;
-        color: #333;
+        background-color: @colorYellow;
+        color: @colorGrayDark;
     }
     &__sizes input[type='radio']:checked ~ .product__sizes-text::after {
         content: ' см';
@@ -527,7 +534,7 @@
     &__price {
         font-family: 'Roboto-Bold';
         font-size: 2.6rem;
-        color: #565656;
+        color: @colorGray;
         text-align: center;
         width: 100%;
         padding-right: 10px;
@@ -537,7 +544,7 @@
         font-size: 1.7rem;
         text-transform: uppercase;
         color: white;
-        background-color: @color-red;
+        background-color: @colorRed;
         border: none;
         outline: none;
         padding: 10px 17px;
@@ -550,7 +557,7 @@
     }
     &__adding-button:hover {
         cursor: pointer;
-        background-color: @color-red_light;
+        background-color: @colorRedLight;
     }
 }
 
@@ -665,7 +672,7 @@
         word-spacing: -2px;
         color: white;
         padding: 25px 30px 20px;
-        background-color: rgba(0, 0, 0, .8);
+        background-color: @colorBlackOpacity;
     }
     &__item-title {
         font-family: 'Arial-Bold-Italic';
@@ -701,7 +708,7 @@
 
     &__title {
         font-family: 'Arial-Bold-Italic';
-        color: @color-red;
+        color: @colorRed;
         text-transform: uppercase;
         font-size: 2.1rem;
         text-align: center;
@@ -758,7 +765,7 @@
     &__item-info {
         padding-top: 2px;
         font-size: 1.2rem;
-        color: @color-red;
+        color: @colorRed;
         font-family: 'Roboto-Bold';
     }
     &__buy-button {
@@ -766,7 +773,7 @@
         font-size: 1.7rem;
         text-transform: uppercase;
         color: white;
-        background-color: @color-red;
+        background-color: @colorRed;
         border: none;
         outline: none;
         padding: 10px 17px;
@@ -779,7 +786,7 @@
     }
     &__buy-button:hover {
         cursor: pointer;
-        background-color: @color-red_light;
+        background-color: @colorRedLight;
     }
 }
 
