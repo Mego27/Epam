@@ -1,0 +1,107 @@
+body {
+  font-size: 10px;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+#root {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+.todo {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.top-panel {
+  width: 70%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.change-all-tod-button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-right: 15px;
+  background-color: rgb(52, 140, 255);
+  outline: none;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 15px;
+  transition: all 0.2s ease-in;
+}
+.change-all-tod-button:hover {
+  cursor: pointer;
+  background-color: rgb(42, 97, 250);
+}
+
+.form-add-todo {
+  display: flex;
+  align-items: stretch;
+}
+.input-title-todo {
+  font-size: 2rem;
+  width: 100%;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 15px;
+  outline: none;
+  padding: 0 20px;
+}
+
+.add-todo-button {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 10px;
+  margin-left: 15px;
+  white-space: nowrap;
+  background-color: rgb(52, 140, 255);
+  outline: none;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 15px;
+  transition: all 0.2s ease-in;
+}
+.add-todo-button:hover {
+  cursor: pointer;
+  background-color: rgb(42, 97, 250);
+}
+
+.todo-list {
+  width: 70%;
+  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 15px;
+  list-style: none;
+}
+.todo-item {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+.done {
+  text-decoration: line-through;
+}
+.input-checkbox {
+  margin-right: 10px;
+}
+
+.remove-button {
+  margin-left: auto;
+  margin-right: 0;
+  padding: 3px 10px;
+  background-color: rgb(52, 140, 255);
+  outline: none;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 15px;
+  transition: all 0.2s ease-in;
+}
+.remove-button:hover {
+  cursor: pointer;
+  background-color: rgb(42, 97, 250);
+}
