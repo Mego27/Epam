@@ -1,6 +1,6 @@
 import React from 'react';
-import TodoList from './todo-components/TodoList';
-import AddTodo from './todo-components/AddTodo';
+import { TodoList } from './todo-components/TodoList';
+import { AddTodo } from './todo-components/AddTodo';
 import { ChangeAllTodos } from './todo-components/ChangeAllTodo';
 import Context from './context';
 
@@ -55,20 +55,18 @@ function App() {
   }
 
   return (
-    <Context.Provider value={{ removeTodo }}>
-      <div className='todo'>
-        <h1>Todo app</h1>
-        <div className='top-panel'>
-          <ChangeAllTodos changeAllTodos={changeAllTodos} />
-          <AddTodo onCreate={addTodo} />
-        </div>
-        {todos.length ? (
-          <TodoList todos={todos} onToggle={toggleTodo} />
-        ) : (
-          <p>No todos!</p>
-        )}
+    <div className='todo'>
+      <h1>Todo app</h1>
+      <div className='top-panel'>
+        <ChangeAllTodos changeAllTodos={changeAllTodos} />
+        <AddTodo onCreate={addTodo} />
       </div>
-    </Context.Provider>
+      {todos.length ? (
+        <TodoList todos={todos} onToggle={toggleTodo} removeTodo={removeTodo} />
+      ) : (
+        <p>No todos!</p>
+      )}
+    </div>
   );
 }
 

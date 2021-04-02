@@ -1,12 +1,23 @@
 import React from 'react';
-import TodoItem from './TodoItem';
+import { TodoItem } from './TodoItem';
 
-export default function TodoList(props) {
-  return (
-    <ul className='todo-list'>
-      {props.todos.map((todo) => (
-        <TodoItem todo={todo} key={todo.id} onChange={props.onToggle} />
-      ))}
-    </ul>
-  );
+export class TodoList extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state.props = props;
+  // }
+  render() {
+    return (
+      <ul className='todo-list'>
+        {this.props.todos.map((todo) => (
+          <TodoItem
+            todo={todo}
+            key={todo.id}
+            onChange={this.props.onToggle}
+            removeTodo={this.props.removeTodo}
+          />
+        ))}
+      </ul>
+    );
+  }
 }
