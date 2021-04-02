@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import Context from '../context';
+import React from 'react';
 
 export class TodoItem extends React.Component {
   // constructor({ todo, onChange }) {

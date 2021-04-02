@@ -2,10 +2,6 @@ import React from 'react';
 import { TodoItem } from './TodoItem';
 
 export class TodoList extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state.props = props;
-  // }
   render() {
     return (
       <ul className='todo-list'>

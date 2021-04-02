@@ -2,13 +2,13 @@ import React from 'react';
 import { TodoList } from './todo-components/TodoList';
 import { AddTodo } from './todo-components/AddTodo';
 import { ChangeAllTodos } from './todo-components/ChangeAllTodo';
-import Context from './context';
+import { Footer } from './todo-components/Footer';
 
 function App() {
   const [todos, setTodos] = React.useState([
     { id: 1, title: 'Create react app', done: false },
     { id: 2, title: 'Push to Git', done: true },
-    { id: 3, title: 'Meeting in Microsoft Teams at 19:00', done: false },
+    { id: 3, title: 'Meeting in Microsoft Teams at 18:00', done: false },
   ]);
 
   function toggleTodo(id) {
@@ -50,8 +50,24 @@ function App() {
     setTodos(todos.filter(({ id }) => id !== todoId));
   }
 
+  function removeCompletedTodos() {
+    setTodos(todos.filter(({ done }) => done === false));
+  }
+
   function changeAllTodos() {
-    setTodos(todos.map(({ done }) => (done = !done)));
+    setTodos(() => {
+      let doneValue = true;
+
+      if (todos.every(({ done }) => done === true)) {
+        doneValue = false;
+      }
+
+      return todos.map((todo) => {
+        todo.done = doneValue;
+
+        return todo;
+      });
+    });
   }
 
   return (
@@ -62,7 +78,14 @@ function App() {
         <AddTodo onCreate={addTodo} />
       </div>
       {todos.length ? (
-        <TodoList todos={todos} onToggle={toggleTodo} removeTodo={removeTodo} />
+        <div className='content'>
+          <TodoList
+            todos={todos}
+            onToggle={toggleTodo}
+            removeTodo={removeTodo}
+          />
+          <Footer todos={todos} removeCompletedTodos={removeCompletedTodos} />
+        </div>
       ) : (
         <p>No todos!</p>
       )}

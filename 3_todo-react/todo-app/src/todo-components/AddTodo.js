@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export class AddTodo extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: '' };
-    // this.state.onCreate = onCreate;
   }
   render() {
-    // const [value, setValue] = useState('');
-
     function submitHandler(event) {
       event.preventDefault();
 
       if (this.state.value.trim()) {
         this.props.onCreate(this.state.value);
-        // this.setState({ value: '' });
       }
     }
     return (
