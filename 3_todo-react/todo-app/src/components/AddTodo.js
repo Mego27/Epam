@@ -5,16 +5,21 @@ export class AddTodo extends React.Component {
     super(props);
     this.state = { value: '' };
   }
-  render() {
-    function submitHandler(event) {
-      event.preventDefault();
 
-      if (this.state.value.trim()) {
-        this.props.onCreate(this.state.value);
-      }
+  submitHandler(event) {
+    event.preventDefault();
+
+    if (this.state.value.trim()) {
+      this.props.onCreate(this.state.value);
     }
+  }
+
+  render() {
     return (
-      <form className='form-add-todo' onSubmit={submitHandler.bind(this)}>
+      <form
+        className='form-add-todo'
+        onSubmit={(event) => this.submitHandler(event)}
+      >
         <input
           className='input-title-todo'
           value={this.state.value}
