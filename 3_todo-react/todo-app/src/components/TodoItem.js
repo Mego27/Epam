@@ -8,8 +8,6 @@ export class TodoItem extends React.Component {
 
   changeInstanceTodo({ currentTarget }) {
     const { isEditing } = this.state;
-    // const inputTodo = document.querySelectorAll('.input-todo')[0];
-    // const spanTodo = document.querySelectorAll('li span')[0];
 
     this.setState({ isEditing: !isEditing });
 
