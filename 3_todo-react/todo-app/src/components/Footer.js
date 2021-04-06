@@ -17,9 +17,37 @@ export class Footer extends React.Component {
       <div className='footer'>
         <div>{remainingTodos} items left</div>
         <div className='filter-buttons'>
-          <button className='button'>All</button>
-          <button className='button'>Activity</button>
-          <button className='button'>Completed</button>
+          <label>
+            <input
+              type='radio'
+              name='filter-todo'
+              value='all'
+              className='button'
+              onChange={(event) => this.props.filterTodos(event.target.value)}
+              defaultChecked
+            />
+            <span>All</span>
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='filter-todo'
+              value='activity'
+              className='button'
+              onChange={(event) => this.props.filterTodos(event.target.value)}
+            />
+            <span>Activity</span>
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='filter-todo'
+              value='completed'
+              className='button'
+              onChange={(event) => this.props.filterTodos(event.target.value)}
+            />
+            <span>Completed</span>
+          </label>
         </div>
         <button
           className='button'

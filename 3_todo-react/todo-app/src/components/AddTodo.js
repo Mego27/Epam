@@ -24,6 +24,7 @@ export class AddTodo extends React.Component {
           className='input-title-todo'
           value={this.state.value}
           onChange={(event) => this.setState({ value: event.target.value })}
+          placeholder='Whats need to be done?'
         />
         <button className='add-todo-button' type='submit'>
           <svg width='25' viewBox='0 0 448 512'>

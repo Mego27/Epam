@@ -11,6 +11,7 @@ export class App extends React.Component {
       { id: 2, title: 'Push to Git', done: true },
       { id: 3, title: 'Meeting in Microsoft Teams at 18:00', done: false },
     ],
+    filter: 'all',
   };
 
   toggleTodo(id) {
@@ -86,8 +87,12 @@ export class App extends React.Component {
     this.setState({ todos: newTodos });
   }
 
+  filterTodos(type) {
+    this.setState({ filter: type });
+  }
+
   render() {
-    const { todos } = this.state;
+    const { todos, filter } = this.state;
 
     return (
       <div className='todo'>
@@ -100,12 +105,14 @@ export class App extends React.Component {
           <div className='content'>
             <TodoList
               todos={todos}
+              filter={filter}
               onToggle={(id) => this.toggleTodo(id)}
               removeTodo={this.removeTodo}
               editTodoItem={(id, title) => this.editTodoItem(id, title)}
             />
             <Footer
               todos={todos}
+              filterTodos={(type) => this.filterTodos(type)}
               removeCompletedTodos={() => this.removeCompletedTodos()}
             />
           </div>

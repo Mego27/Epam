@@ -6,20 +6,20 @@ export class TodoItem extends React.Component {
     this.state = { isEditing: false };
   }
 
-  changeInstanceTodo(title) {
+  changeInstanceTodo({ currentTarget }) {
     const { isEditing } = this.state;
-    const inputTodo = document.querySelectorAll('.input-todo')[0];
-    const spanTodo = document.querySelectorAll('li span')[0];
+    // const inputTodo = document.querySelectorAll('.input-todo')[0];
+    // const spanTodo = document.querySelectorAll('li span')[0];
 
     this.setState({ isEditing: !isEditing });
 
     if (isEditing) {
-      spanTodo.classList.add('hidden');
-      inputTodo.classList.remove('hidden');
-      inputTodo.focus();
+      currentTarget.classList.add('hidden');
+      currentTarget.nextSibling.classList.remove('hidden');
+      currentTarget.nextSibling.focus();
     } else {
-      spanTodo.classList.remove('hidden');
-      inputTodo.classList.add('hidden');
+      currentTarget.previousSibling.classList.remove('hidden');
+      currentTarget.classList.add('hidden');
     }
   }
 
@@ -38,10 +38,10 @@ export class TodoItem extends React.Component {
           className='input-todo hidden'
           defaultValue={title}
           onChange={(event) => editTodoItem(event.target.value)}
-          onBlur={(title) => this.changeInstanceTodo(title)}
+          onBlur={(event) => this.changeInstanceTodo(event)}
         />
         <span
-          onDoubleClick={(title) => this.changeInstanceTodo(title)}
+          onDoubleClick={(event) => this.changeInstanceTodo(event)}
           className={done ? 'done' : ''}
         >
           {title}

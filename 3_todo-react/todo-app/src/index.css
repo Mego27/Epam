@@ -85,6 +85,9 @@ body {
   align-items: center;
   margin-right: 10px;
 }
+.todo-item:hover {
+  cursor: pointer;
+}
 .done {
   text-decoration: line-through;
   color: gray;
@@ -145,6 +148,27 @@ body {
 
 .filter-buttons {
   display: flex;
+}
+
+.filter-buttons input {
+  display: none;
+}
+
+.filter-buttons span {
+  margin: 0 5px;
+  padding: 10px;
+}
+
+.filter-buttons span:hover {
+  cursor: pointer;
+}
+
+.filter-buttons input:checked ~ span {
+  text-decoration: underline;
+}
+.input-todo {
+  font-size: 1.5rem;
+  width: 85%;
 }
 
 .hidden {
