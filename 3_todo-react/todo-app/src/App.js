@@ -5,13 +5,10 @@ import { Footer } from './components/Footer';
 
 export class App extends React.Component {
   state = {
-    todos: [
-      { id: 1, title: 'Create react app', done: false },
-      { id: 2, title: 'Push to Git', done: true },
-      { id: 3, title: 'Meeting in Microsoft Teams at 18:00', done: false },
-    ],
+    todos: [],
     filterType: 'all',
   };
+  counterId = 0;
 
   toggleTodo(id) {
     const newTodos = this.state.todos.map((todo) => {
@@ -24,17 +21,8 @@ export class App extends React.Component {
     this.setState({ todos: newTodos });
   }
 
-  getMaxIdTodo() {
-    const { todos } = this.state;
-
-    if (todos.length > 0) {
-      return Math.max.apply(
-        null,
-        todos.map(({ id }) => id)
-      );
-    }
-
-    return 0;
+  getLastIdTodo() {
+    return this.counterId++;
   }
 
   addTodo = (title) => {
@@ -42,7 +30,7 @@ export class App extends React.Component {
       ...this.state.todos,
       {
         title,
-        id: this.getMaxIdTodo() + 1,
+        id: this.getLastIdTodo() + 1,
         done: false,
       },
     ];
@@ -97,7 +85,6 @@ export class App extends React.Component {
       <div className="todo">
         <h1>Todo app</h1>
         <div className="top-panel">
-          {/* <ChangeAllTodos changeAllTodos={() => this.changeAllTodos()} /> */}
           <button
             className="change-all-todo-button"
             onClick={() => this.changeAllTodos()}
