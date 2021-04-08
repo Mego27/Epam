@@ -24,7 +24,7 @@ body {
   align-items: stretch;
   justify-content: center;
 }
-.change-all-tod-button {
+.change-all-todo-button {
   display: flex;
   align-items: center;
   padding: 10px;
@@ -35,7 +35,7 @@ body {
   border-radius: 15px;
   transition: all 0.2s ease-in;
 }
-.change-all-tod-button:hover {
+.change-all-todo-button:hover {
   cursor: pointer;
   background-color: rgb(42, 97, 250);
 }
@@ -92,7 +92,7 @@ body {
   text-decoration: line-through;
   color: gray;
 }
-.input-checkbox {
+.todo-done {
   margin-right: 10px;
 }
 
@@ -166,7 +166,7 @@ body {
 .filter-buttons input:checked ~ span {
   text-decoration: underline;
 }
-.input-todo {
+.todo-editing-title {
   font-size: 1.5rem;
   width: 85%;
 }

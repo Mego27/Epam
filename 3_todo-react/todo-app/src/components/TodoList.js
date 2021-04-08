@@ -2,26 +2,25 @@ import React from 'react';
 import { TodoItem } from './TodoItem';
 
 export class TodoList extends React.Component {
-  render() {
-    const { todos, filter, onToggle, removeTodo, editTodoItem } = this.props;
-    let filteredTodos;
-
-    switch (filter) {
+  getFilteredTodos(filterType, todos) {
+    switch (filterType) {
       case 'activity':
-        filteredTodos = todos.filter((todo) => todo.done === false);
-        break;
+        return todos.filter((todo) => todo.done === false);
 
       case 'completed':
-        filteredTodos = todos.filter((todo) => todo.done === true);
-        break;
+        return todos.filter((todo) => todo.done === true);
 
       default:
-        filteredTodos = todos;
-        break;
+        return todos;
     }
+  }
+
+  render() {
+    const { todos, filterType, onToggle, removeTodo, editTodoItem } = this.props;
+    const filteredTodos = this.getFilteredTodos(filterType, todos);
 
     return (
-      <ul className='todo-list'>
+      <ul className="todo-list">
         {filteredTodos.map(({ id, title, done }) => (
           <TodoItem
             key={id}
@@ -29,7 +28,7 @@ export class TodoList extends React.Component {
             done={done}
             onChange={() => onToggle(id)}
             removeTodo={() => removeTodo(id)}
-            editTodoItem={(title) => editTodoItem(id, title)}
+            onEdit={(title) => editTodoItem(id, title)}
           />
         ))}
       </ul>

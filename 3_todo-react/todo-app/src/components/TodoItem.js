@@ -6,45 +6,40 @@ export class TodoItem extends React.Component {
     this.state = { isEditing: false };
   }
 
-  changeInstanceTodo({ currentTarget }) {
+  changeInstanceTodo() {
     const { isEditing } = this.state;
 
     this.setState({ isEditing: !isEditing });
-
-    if (isEditing) {
-      currentTarget.classList.add('hidden');
-      currentTarget.nextSibling.classList.remove('hidden');
-      currentTarget.nextSibling.focus();
-    } else {
-      currentTarget.previousSibling.classList.remove('hidden');
-      currentTarget.classList.add('hidden');
-    }
   }
 
   render() {
-    const { title, done, onChange, removeTodo, editTodoItem } = this.props;
+    const { title, done, onChange, removeTodo, onEdit } = this.props;
+    const { isEditing } = this.state;
 
     return (
-      <li className='todo-item'>
+      <li className="todo-item">
         <input
-          type='checkbox'
-          className='input-checkbox'
+          type="checkbox"
+          className="todo-done"
           checked={done}
           onChange={onChange}
         />
-        <input
-          className='input-todo hidden'
-          defaultValue={title}
-          onChange={(event) => editTodoItem(event.target.value)}
-          onBlur={(event) => this.changeInstanceTodo(event)}
-        />
-        <span
-          onDoubleClick={(event) => this.changeInstanceTodo(event)}
-          className={done ? 'done' : ''}
-        >
-          {title}
-        </span>
-        <button className='remove-button' onClick={removeTodo}>
+        {isEditing ? (
+          <input
+            className="todo-editing-title"
+            defaultValue={title}
+            onChange={(event) => onEdit(event.target.value)}
+            onBlur={() => this.changeInstanceTodo()}
+          />
+        ) : (
+          <span
+            onDoubleClick={() => this.changeInstanceTodo()}
+            className={done ? "done" : ""}
+          >
+            {title}
+          </span>
+        )}
+        <button className="remove-button" onClick={removeTodo}>
           <b>X</b>
         </button>
       </li>
