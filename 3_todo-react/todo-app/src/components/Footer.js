@@ -3,9 +3,9 @@ import React from 'react';
 export class Footer extends React.Component {
   render() {
     const { todos, filterTodos, removeCompletedTodos } = this.props;
-    const remainingTodos = todos.filter(({ done }) => done === false)
+    const remainingTodos = todos.filter(({ done }) => !done)
       .length;
-    const completedTodos = todos.filter(({ done }) => done === true)
+    const completedTodos = todos.filter(({ done }) => done)
       .length;
 
     return (

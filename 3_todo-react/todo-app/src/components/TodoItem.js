@@ -28,13 +28,13 @@ export class TodoItem extends React.Component {
           <input
             className="todo-editing-title"
             defaultValue={title}
-            onChange={(event) => onEdit(event.target.value)}
+            onChange={({ target }) => onEdit(target.value)}
             onBlur={() => this.changeInstanceTodo()}
           />
         ) : (
           <span
             onDoubleClick={() => this.changeInstanceTodo()}
-            className={done ? "done" : ""}
+            className={done ? 'done' : ''}
           >
             {title}
           </span>
