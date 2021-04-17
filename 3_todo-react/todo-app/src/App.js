@@ -6,14 +6,28 @@ import { Footer } from './components/Footer';
 export class App extends React.Component {
   state = {
     todos: [],
-    filterType: 'all',
+    currentFilterType: 'all',
   };
   counterId = 0;
+  filterTypes = [
+    {
+      value: 'all',
+      text: 'All',
+    },
+    {
+      value: 'activity',
+      text: 'Activity',
+    },
+    {
+      value: 'completed',
+      text: 'Completed',
+    },
+  ];
 
   toggleTodo(id) {
     const newTodos = this.state.todos.map((todo) => {
       if (todo.id === id) {
-        todo.done = !todo.done;
+        return { ...todo, done: !todo.done };
       }
 
       return todo;
@@ -75,11 +89,11 @@ export class App extends React.Component {
   }
 
   filterTodos(type) {
-    this.setState({ filterType: type });
+    this.setState({ currentFilterType: type });
   }
 
   render() {
-    const { todos, filterType } = this.state;
+    const { todos, currentFilterType } = this.state;
 
     return (
       <div className="todo">
@@ -99,13 +113,15 @@ export class App extends React.Component {
           <div className="content">
             <TodoList
               todos={todos}
-              filterType={filterType}
+              filterType={currentFilterType}
               onToggle={(id) => this.toggleTodo(id)}
               removeTodo={(id) => this.removeTodo(id)}
               editTodoItem={(id, title) => this.editTodoItem(id, title)}
             />
             <Footer
               todos={todos}
+              filterTypes={this.filterTypes}
+              currentFilterType={this.state.currentFilterType}
               filterTodos={(type) => this.filterTodos(type)}
               removeCompletedTodos={() => this.removeCompletedTodos()}
             />

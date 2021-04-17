@@ -1,8 +1,9 @@
 import React from 'react';
+import { FilterButton } from './FilterButton';
 
 export class Footer extends React.Component {
   render() {
-    const { todos, filterTodos, removeCompletedTodos } = this.props;
+    const { todos, filterTodos, filterTypes, currentFilterType, removeCompletedTodos } = this.props;
     const remainingTodos = todos.filter(({ done }) => !done)
       .length;
     const completedTodos = todos.filter(({ done }) => done)
@@ -12,37 +13,15 @@ export class Footer extends React.Component {
       <div className="footer">
         <div>{remainingTodos} items left</div>
         <div className="filter-buttons">
-          <label>
-            <input
-              type="radio"
-              name="filter-todo"
-              value="all"
-              className="button"
-              onChange={({ target }) => filterTodos(target.value)}
-              defaultChecked
+          {filterTypes.map(({value, text}) => 
+            <FilterButton
+              key={value}
+              filterType={value}
+              text={text}
+              filterTodos={filterTodos}
+              isDefaultCheckedButton={currentFilterType === value}
             />
-            <span>All</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="filter-todo"
-              value="activity"
-              className="button"
-              onChange={({ target }) => filterTodos(target.value)}
-            />
-            <span>Activity</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="filter-todo"
-              value="completed"
-              className="button"
-              onChange={({ target }) => filterTodos(target.value)}
-            />
-            <span>Completed</span>
-          </label>
+          )}
         </div>
         <button
           className="button"
